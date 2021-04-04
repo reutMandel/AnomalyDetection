@@ -61,19 +61,23 @@ namespace AnomalyDetection.Model
                 throw new Exception("csv path or xml path are not valid"); // create new exception
             }
 
-            client.Connect();
-
-            using (StreamReader sr = new StreamReader(csvPath))
+            Thread thr = new Thread(delegate ()
             {
-                string currentLine;
-                while ((currentLine = sr.ReadLine()) != null)
+                client.Connect();
+
+                using (StreamReader sr = new StreamReader(csvPath))
                 {
-                    currentLine += "\n";
-                    client.Send(Encoding.ASCII.GetBytes(currentLine));
-                    Thread.Sleep(100);
+                    string currentLine;
+                    while ((currentLine = sr.ReadLine()) != null)
+                    {
+                        currentLine += "\n";
+                        client.Send(Encoding.ASCII.GetBytes(currentLine));
+                        Thread.Sleep(100);
+                    }
                 }
-            }
-            client.Disconnect();
+                client.Disconnect();
+            });
+            thr.Start();
         }
     }
 }
