@@ -13,5 +13,6 @@
             <Button x:Name="FGButton" Content="flight gear path" Command="{Binding FgButtonCommand}"  Margin="10"  Width="100" Height="40"/>
             <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
         </StackPanel>
+        <Slider Minimum="0" Maximum="{Binding NumOfLines}" TickPlacement="None" IsSnapToTickEnabled="True" Background="Black" Margin="155,329,138.6,41" Width="500" Height="50" ></Slider>
     </Grid>
 </Window>

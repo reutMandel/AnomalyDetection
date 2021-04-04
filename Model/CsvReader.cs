@@ -14,7 +14,7 @@ namespace AnomalyDetection.Model
                 string currentLine;
                 while ((currentLine = sr.ReadLine()) != null)
                 {
-                    lines.Add(currentLine);
+                    lines.Add(currentLine + "\n");
                 }
             }
 

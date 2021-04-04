@@ -12,7 +12,9 @@ namespace AnomalyDetection.Model
         private string xmlPath;
         private string csvPath;
         private string fgPath;
+        private int numOfLines;
         private IClient client;
+        private Thread thread;
         private List<string> csvFile;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -51,6 +53,16 @@ namespace AnomalyDetection.Model
             }
         }
 
+        public int NumOfLines
+        {
+            get { return numOfLines; }
+            set
+            {
+                numOfLines = value;
+                NotifyPropertyChanged("numOfLines");
+            }
+        }
+
         public void NotifyPropertyChanged(string propName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
@@ -59,7 +71,9 @@ namespace AnomalyDetection.Model
         public void ReadCsvFile()
         {
             csvFile = CsvReader.ReadCsvFile(this.csvPath);
+            NumOfLines = csvFile.Count;
         }
+
 
         public void StartStimulate()
         {
@@ -68,23 +82,28 @@ namespace AnomalyDetection.Model
                 throw new Exception("csv path or xml path are not valid"); // create new exception
             }
 
-            Thread thr = new Thread(delegate ()
-            {
-                client.Connect();
+            client.Connect();
 
-                using (StreamReader sr = new StreamReader(csvPath))
-                {
-                    string currentLine;
-                    while ((currentLine = sr.ReadLine()) != null)
-                    {
-                        currentLine += "\n";
-                        client.Send(Encoding.ASCII.GetBytes(currentLine));
-                        Thread.Sleep(100);
-                    }
-                }
-                client.Disconnect();
-            });
-            thr.Start();
+            ChangeStimulate(0);
+        }
+
+        public void ChangeStimulate(int line)
+        {
+            if (thread != null && thread.IsAlive)
+                thread.Abort();
+
+            thread = new Thread(() => {SendData(client, line); });
+     
+            thread.Start();
+        }
+
+        private void SendData(IClient client, int line)
+        {
+            for (int i = line; i < numOfLines; i++)
+            {
+                client.Send(Encoding.ASCII.GetBytes(csvFile[i]));
+                Thread.Sleep(100);
+            }
         }
     }
 }

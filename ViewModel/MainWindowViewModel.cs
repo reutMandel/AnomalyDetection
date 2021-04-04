@@ -1,5 +1,7 @@
 ﻿using AnomalyDetection.Model;
 using Microsoft.Win32;
+using System;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace AnomalyDetection.ViewModel
@@ -8,32 +10,32 @@ namespace AnomalyDetection.ViewModel
     {
         private IFGModel fgModel;
         private bool xmlIsClick, csvIsClick, fgIsClick, startIsEnable;
+        private int numOfLines;
         public ICommand XmlButtonCommand { get; set; }
         public ICommand CsvButtonCommand { get; set; }
         public ICommand FgButtonCommand { get; set; }
         public ICommand StartButtonCommand { get; set; }
-
-        public bool StartIsClick
-        {
-            get { return startIsEnable; }
-            set
-            {
-                startIsEnable = value;
-                NotifyPropertyChanged("StartIsClick");
-            }
-        }
+        public ICommand SliderCommand { get; set; }
+        
 
         public MainWindowViewModel(IFGModel fgModel)
         {
             this.fgModel = fgModel;
+            fgModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged( e.PropertyName); };
             XmlButtonCommand = new DelegateCommand(o => XmlButtonClick());
             CsvButtonCommand = new DelegateCommand(o => CsvButtonClick());
             FgButtonCommand = new DelegateCommand(o => FgButtonClick());
             StartButtonCommand = new DelegateCommand(o => StartButtonClick());
+            SliderCommand = new DelegateCommand(o => SliderHandler());
             xmlIsClick = false;
             csvIsClick = false;
             fgIsClick = false;
             startIsEnable = false;
+        }
+
+        private void SliderHandler()
+        {
+
         }
 
         public string XmlFile
@@ -63,6 +65,26 @@ namespace AnomalyDetection.ViewModel
             {
                 fgModel.FgPath = value;
                 NotifyPropertyChanged("fgPath");
+            }
+        }
+
+        public bool StartIsClick
+        {
+            get { return startIsEnable; }
+            set
+            {
+                startIsEnable = value;
+                NotifyPropertyChanged("StartIsClick");
+            }
+        }
+
+        public int NumOfLines
+        {
+            get { return numOfLines; }
+            set
+            {
+                numOfLines = value;
+                NotifyPropertyChanged("numOfLines");
             }
         }
 
