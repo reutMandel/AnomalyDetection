@@ -59,9 +59,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\CsvReader.cs" />
+    <Compile Include="Model\Client.cs" />
     <Compile Include="Model\FGModel.cs" />
+    <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IFGModel.cs" />
+    <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="Views\MainWindowView.xaml.cs">

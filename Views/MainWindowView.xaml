@@ -7,9 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindowView" Height="450" Width="800">
     <Grid>
-        <Button x:Name="XmlButton" Content="choose xml file" Click="XmlButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95" Margin="645,73,0,0" Height="31"/>
-        <Button x:Name="CsvButton" Content="choose csv file" Click="CsvButton_Click" HorizontalAlignment="Left" Margin="645,125,0,0" VerticalAlignment="Top" Width="95" Height="36"/>
-        <Button x:Name="DoneButton" Content="show simolator"  IsEnabled="{Binding doneEnable}" Click="DoneButton_Click" HorizontalAlignment="Left" Margin="645,233,0,0" VerticalAlignment="Top" Width="95" Height="36"/>
-        <Button x:Name="FGButton" Content="flight gear path" Click="FGButton_Click" HorizontalAlignment="Left" Margin="645,179,0,0" VerticalAlignment="Top" Width="95" Height="36"/>
+        <StackPanel HorizontalAlignment="Right">
+            <Button x:Name="XmlButton" Content="choose xml file" Command="{Binding XmlButtonCommand}"  Width="100" Margin="10" Height="40"/>
+            <Button x:Name="CsvButton" Content="choose csv file" Command="{Binding CsvButtonCommand}"  Margin="10"  Width="100" Height="40"/>
+            <Button x:Name="FGButton" Content="flight gear path" Command="{Binding FgButtonCommand}"  Margin="10"  Width="100" Height="40"/>
+            <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
+        </StackPanel>
     </Grid>
 </Window>

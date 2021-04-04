@@ -24,61 +24,12 @@ namespace AnomalyDetection.Views
     public partial class MainWindowView : Window
     {
         private MainWindowViewModel mainWindowViewModel;
-        private bool doneEnable;
-        private bool isClickFg;
-        private bool isClickXml;
-        private bool isClickCsv;
 
         public MainWindowView()
         {
             InitializeComponent();
             this.mainWindowViewModel = new MainWindowViewModel(new FGModel());
             DataContext = mainWindowViewModel;
-            doneEnable = false;
-            isClickFg = false;
-            isClickXml = false;
-            isClickCsv = false;
-        }
-
-        private void CsvButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                // Path.GetFileName(openFileDialog.FileName());
-                mainWindowViewModel.CsvFile = openFileDialog.FileName;
-                isClickCsv = true;
-                doneEnable = isClickCsv && isClickFg && isClickXml;
-            }
-        }
-
-        private void XmlButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                // Path.GetFileName(openFileDialog.FileName());
-                mainWindowViewModel.XmlFile = openFileDialog.FileName;
-                isClickXml = true;
-                doneEnable = isClickCsv && isClickFg && isClickXml;
-            }
-        }
-
-        private void DoneButton_Click(object sender, RoutedEventArgs e)
-        {
-            mainWindowViewModel.MVStartSimulator();
-        }
-
-        private void FGButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                // Path.GetFileName(openFileDialog.FileName());
-                mainWindowViewModel.FgPath = openFileDialog.FileName;
-                isClickFg = true;
-                doneEnable = isClickCsv && isClickFg && isClickXml;
-            }
         }
     }
 }
