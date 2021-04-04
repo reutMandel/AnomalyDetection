@@ -90,6 +90,7 @@ namespace AnomalyDetection.ViewModel
                 CsvFile = openFileDialog.FileName;
                 csvIsClick = true;
                 StartIsClick = fgIsClick && xmlIsClick && csvIsClick;
+                fgModel.ReadCsvFile();
             }
         }
 

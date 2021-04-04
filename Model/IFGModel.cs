@@ -16,5 +16,7 @@ namespace AnomalyDetection.Model
         string FgPath { get; set; }
 
         void StartStimulate();
+
+        void ReadCsvFile();
     }
 }

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Text;
 using System.IO;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace AnomalyDetection.Model
 {
@@ -12,6 +13,7 @@ namespace AnomalyDetection.Model
         private string csvPath;
         private string fgPath;
         private IClient client;
+        private List<string> csvFile;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public FGModel()
@@ -52,6 +54,11 @@ namespace AnomalyDetection.Model
         public void NotifyPropertyChanged(string propName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
+
+        public void ReadCsvFile()
+        {
+            csvFile = CsvReader.ReadCsvFile(this.csvPath);
         }
 
         public void StartStimulate()

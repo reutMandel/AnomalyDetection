@@ -60,6 +60,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\CsvReader.cs" />
     <Compile Include="Model\FGModel.cs" />
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IFGModel.cs" />
