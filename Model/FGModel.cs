@@ -18,6 +18,7 @@ namespace AnomalyDetection.Model
         private Thread thread;
         private List<string> csvFile;
         public event PropertyChangedEventHandler PropertyChanged;
+        public JoystickProperties JoystickProperties { get; set; } 
 
         private static readonly FGModel instance = new FGModel();
 
@@ -95,6 +96,11 @@ namespace AnomalyDetection.Model
             NumOfLines = csvFile.Count;
         }
 
+        public void ReadXmlFile()
+        {
+            FGXmlReader.Reader(this.xmlPath);
+            NumOfLines = csvFile.Count;
+        }
 
         public void StartStimulate()
         {

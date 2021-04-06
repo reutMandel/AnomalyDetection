@@ -1,6 +1,5 @@
 ﻿using AnomalyDetection.Model;
 using Microsoft.Win32;
-using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -10,7 +9,7 @@ namespace AnomalyDetection.ViewModel
     {
         private IFGModel fgModel;
         private bool xmlIsClick, csvIsClick, fgIsClick, startIsEnable;
-
+        private int numOfLines;
         public ICommand XmlButtonCommand { get; set; }
         public ICommand CsvButtonCommand { get; set; }
         public ICommand FgButtonCommand { get; set; }
@@ -109,6 +108,7 @@ namespace AnomalyDetection.ViewModel
                 XmlFile = openFileDialog.FileName;
                 xmlIsClick = true;
                 StartIsClick = fgIsClick && xmlIsClick && csvIsClick;
+                fgModel.ReadXmlFile();
             }
         }
     }
