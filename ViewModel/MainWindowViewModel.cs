@@ -15,9 +15,7 @@ namespace AnomalyDetection.ViewModel
         public ICommand CsvButtonCommand { get; set; }
         public ICommand FgButtonCommand { get; set; }
         public ICommand StartButtonCommand { get; set; }
-        public ICommand SliderCommand { get; set; }
-        public ICommand PauseCommand { get; set; }
-        public ICommand ContinueCommand { get; set; }
+ 
 
         public MainWindowViewModel(IFGModel fgModel)
         {
@@ -27,8 +25,6 @@ namespace AnomalyDetection.ViewModel
             CsvButtonCommand = new DelegateCommand(o => CsvButtonClick());
             FgButtonCommand = new DelegateCommand(o => FgButtonClick());
             StartButtonCommand = new DelegateCommand(o => StartButtonClick());
-            PauseCommand = new DelegateCommand(o => PauseSimulator());
-            ContinueCommand = new DelegateCommand(o => ContinueSimulator());
             xmlIsClick = false;
             csvIsClick = false;
             fgIsClick = false;
@@ -66,26 +62,7 @@ namespace AnomalyDetection.ViewModel
             }
         }
 
-        public int NumOfLines
-        {
-            get { return fgModel.NumOfLines; }
-        }
-
-        public int CurrentPosition
-        {
-           get { return fgModel.CurrentPosition; }
-           set
-           {
-                fgModel.CurrentPosition = value;
-                NotifyPropertyChanged("CurrentPosition");
-           }
-        }
-
-        public void SlideHandler()
-        {
-            fgModel.ChangeStimulate();
-        }
-
+  
         public bool StartIsClick
         {
             get { return startIsEnable; }
@@ -99,17 +76,6 @@ namespace AnomalyDetection.ViewModel
         private void StartButtonClick()
         {
             fgModel.StartStimulate();
-        }
-
-        private void PauseSimulator()
-        {
-            fgModel.PauseStimulate();
-
-        }
-
-        private void ContinueSimulator()
-        {
-            fgModel.ChangeStimulate();
         }
 
         private void FgButtonClick()

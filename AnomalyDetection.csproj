@@ -66,7 +66,11 @@
     <Compile Include="Model\IFGModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ToolBarViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="Views\Controls\ToolBar.xaml.cs">
+      <DependentUpon>ToolBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
@@ -98,13 +102,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\continue.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Page Include="Views\Controls\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\continue.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Images\pause.jpg" />

@@ -18,14 +18,6 @@ namespace AnomalyDetection.Views
             this.mainWindowViewModel = new MainWindowViewModel(FGModel.Instance);
             DataContext = mainWindowViewModel;
         }
-
-       private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if(IsLoaded)
-            {
-                mainWindowViewModel.SlideHandler();
-            }
-        }
     }
 
 }
