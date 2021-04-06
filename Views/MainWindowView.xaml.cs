@@ -15,7 +15,7 @@ namespace AnomalyDetection.Views
         public MainWindowView()
         {
             InitializeComponent();
-            this.mainWindowViewModel = new MainWindowViewModel(new FGModel());
+            this.mainWindowViewModel = new MainWindowViewModel(FGModel.Instance);
             DataContext = mainWindowViewModel;
         }
 
@@ -23,8 +23,7 @@ namespace AnomalyDetection.Views
         {
             if(IsLoaded)
             {
-               // mainWindowViewModel.SliderHandler(System.Int32.Parse(SlideController.Value.ToString()));
-                mainWindowViewModel.SliderHandler();
+                mainWindowViewModel.SlideHandler();
             }
         }
     }

@@ -19,11 +19,22 @@ namespace AnomalyDetection.Model
         private List<string> csvFile;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public FGModel()
+        private static readonly FGModel instance = new FGModel();
+
+        private FGModel()
         {
             this.client = new Client("127.0.0.1", 5400);
             this.currentPosition = 0;
         }
+
+        public static FGModel Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
 
         public string XmlPath
         {
@@ -31,7 +42,6 @@ namespace AnomalyDetection.Model
             set
             {
                 xmlPath = value;
-                NotifyPropertyChanged("xmlPath");
             }
         }
 
@@ -41,7 +51,6 @@ namespace AnomalyDetection.Model
             set
             {
                 csvPath = value;
-                NotifyPropertyChanged("csvPath");
             }
         }
 
@@ -51,7 +60,6 @@ namespace AnomalyDetection.Model
             set
             {
                 fgPath = value;
-                NotifyPropertyChanged("fgPath");
             }
         }
 

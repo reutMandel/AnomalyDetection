@@ -81,7 +81,7 @@ namespace AnomalyDetection.ViewModel
            }
         }
 
-        public void SliderHandler()
+        public void SlideHandler()
         {
             fgModel.ChangeStimulate();
         }
