@@ -9,10 +9,10 @@ namespace AnomalyDetection.ViewModel
         public JoystickViewModel(IFGModel fgModel)
         {
             this.fgModel = fgModel;
-            fgModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
+            fgModel.JoystickProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
         }
 
-        public int Rudder
+        public float Rudder
         {
             get { return fgModel.JoystickProperties.Rudder; }
             set
@@ -21,7 +21,7 @@ namespace AnomalyDetection.ViewModel
                 NotifyPropertyChanged("Rudder");
             }
         }
-        public int Aileron
+        public float Aileron
         {
             get { return fgModel.JoystickProperties.Aileron; }
             set
@@ -30,7 +30,7 @@ namespace AnomalyDetection.ViewModel
                 NotifyPropertyChanged("Aileron");
             }
         }
-        public int Elevator
+        public float Elevator
         {
             get { return fgModel.JoystickProperties.Elevator; }
             set
@@ -39,7 +39,7 @@ namespace AnomalyDetection.ViewModel
                 NotifyPropertyChanged("Elevator");
             }
         }
-        public int Throttle
+        public float Throttle
         {
             get { return fgModel.JoystickProperties.Throttle; }
             set

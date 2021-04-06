@@ -69,14 +69,18 @@
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IFGModel.cs" />
     <Compile Include="Model\JoystickProperties.cs" />
+    <Compile Include="Model\XmlParserUtil.cs" />
     <Compile Include="Model\XmlReader.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\JoystickViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ToolBarViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
-    <Compile Include="Views\JoystickView.xaml.cs">
+    <Compile Include="Views\Controls\JoystickView.xaml.cs">
       <DependentUpon>JoystickView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ToolBar.xaml.cs">
+      <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -109,7 +113,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\JoystickView.xaml">
+    <Page Include="Views\Controls\JoystickView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

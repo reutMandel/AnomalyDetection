@@ -9,7 +9,6 @@ namespace AnomalyDetection.ViewModel
     {
         private IFGModel fgModel;
         private bool xmlIsClick, csvIsClick, fgIsClick, startIsEnable;
-        private int numOfLines;
         public ICommand XmlButtonCommand { get; set; }
         public ICommand CsvButtonCommand { get; set; }
         public ICommand FgButtonCommand { get; set; }
