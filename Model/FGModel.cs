@@ -13,6 +13,7 @@ namespace AnomalyDetection.Model
         private string csvPath;
         private string fgPath;
         private int numOfLines;
+        private int currentPosition;
         private IClient client;
         private Thread thread;
         private List<string> csvFile;
@@ -21,6 +22,7 @@ namespace AnomalyDetection.Model
         public FGModel()
         {
             this.client = new Client("127.0.0.1", 5400);
+            this.currentPosition = 0;
         }
 
         public string XmlPath
@@ -59,9 +61,20 @@ namespace AnomalyDetection.Model
             set
             {
                 numOfLines = value;
-                NotifyPropertyChanged("numOfLines");
+                NotifyPropertyChanged("NumOfLines");
             }
         }
+
+        public int CurrentPosition
+        {
+            get { return currentPosition; }
+            set
+            {
+                currentPosition = value;
+                NotifyPropertyChanged("CurrentPosition");
+            }
+        }
+
 
         public void NotifyPropertyChanged(string propName)
         {
@@ -81,26 +94,32 @@ namespace AnomalyDetection.Model
             {
                 throw new Exception("csv path or xml path are not valid"); // create new exception
             }
-
             client.Connect();
-
-            ChangeStimulate(0);
+            ChangeStimulate();
         }
 
-        public void ChangeStimulate(int line)
+        public void ChangeStimulate()
         {
             if (thread != null && thread.IsAlive)
                 thread.Abort();
 
-            thread = new Thread(() => {SendData(client, line); });
-     
+            thread = new Thread(() => {SendData(client, this.currentPosition); });
             thread.Start();
+        }
+
+        public void PauseStimulate()
+        {
+            if(thread != null && thread.IsAlive)
+            {
+                thread.Abort();
+            }
         }
 
         private void SendData(IClient client, int line)
         {
             for (int i = line; i < numOfLines; i++)
             {
+                CurrentPosition = i;
                 client.Send(Encoding.ASCII.GetBytes(csvFile[i]));
                 Thread.Sleep(100);
             }

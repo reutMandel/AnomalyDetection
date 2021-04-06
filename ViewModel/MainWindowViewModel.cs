@@ -10,13 +10,14 @@ namespace AnomalyDetection.ViewModel
     {
         private IFGModel fgModel;
         private bool xmlIsClick, csvIsClick, fgIsClick, startIsEnable;
-        private int numOfLines;
+
         public ICommand XmlButtonCommand { get; set; }
         public ICommand CsvButtonCommand { get; set; }
         public ICommand FgButtonCommand { get; set; }
         public ICommand StartButtonCommand { get; set; }
         public ICommand SliderCommand { get; set; }
-        
+        public ICommand PauseCommand { get; set; }
+        public ICommand ContinueCommand { get; set; }
 
         public MainWindowViewModel(IFGModel fgModel)
         {
@@ -26,17 +27,14 @@ namespace AnomalyDetection.ViewModel
             CsvButtonCommand = new DelegateCommand(o => CsvButtonClick());
             FgButtonCommand = new DelegateCommand(o => FgButtonClick());
             StartButtonCommand = new DelegateCommand(o => StartButtonClick());
-            SliderCommand = new DelegateCommand(o => SliderHandler());
+            PauseCommand = new DelegateCommand(o => PauseSimulator());
+            ContinueCommand = new DelegateCommand(o => ContinueSimulator());
             xmlIsClick = false;
             csvIsClick = false;
             fgIsClick = false;
             startIsEnable = false;
         }
 
-        private void SliderHandler()
-        {
-
-        }
 
         public string XmlFile
         {
@@ -64,8 +62,28 @@ namespace AnomalyDetection.ViewModel
             set
             {
                 fgModel.FgPath = value;
-                NotifyPropertyChanged("fgPath");
+                NotifyPropertyChanged("FgPath");
             }
+        }
+
+        public int NumOfLines
+        {
+            get { return fgModel.NumOfLines; }
+        }
+
+        public int CurrentPosition
+        {
+           get { return fgModel.CurrentPosition; }
+           set
+           {
+                fgModel.CurrentPosition = value;
+                NotifyPropertyChanged("CurrentPosition");
+           }
+        }
+
+        public void SliderHandler()
+        {
+            fgModel.ChangeStimulate();
         }
 
         public bool StartIsClick
@@ -78,19 +96,20 @@ namespace AnomalyDetection.ViewModel
             }
         }
 
-        public int NumOfLines
-        {
-            get { return numOfLines; }
-            set
-            {
-                numOfLines = value;
-                NotifyPropertyChanged("numOfLines");
-            }
-        }
-
         private void StartButtonClick()
         {
             fgModel.StartStimulate();
+        }
+
+        private void PauseSimulator()
+        {
+            fgModel.PauseStimulate();
+
+        }
+
+        private void ContinueSimulator()
+        {
+            fgModel.ChangeStimulate();
         }
 
         private void FgButtonClick()

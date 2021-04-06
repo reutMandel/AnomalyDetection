@@ -13,6 +13,17 @@
             <Button x:Name="FGButton" Content="flight gear path" Command="{Binding FgButtonCommand}"  Margin="10"  Width="100" Height="40"/>
             <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
         </StackPanel>
-        <Slider Minimum="0" Maximum="{Binding NumOfLines}" TickPlacement="None" IsSnapToTickEnabled="True" Background="Black" Margin="155,329,138.6,41" Width="500" Height="50" ></Slider>
+        <Slider x:Name="SlideController" Minimum="0" Maximum="{Binding NumOfLines}" TickPlacement="None" IsSnapToTickEnabled="True" Background="Gray" Margin="24,361,119.6,23" ValueChanged="Slider_ValueChanged" Value="{Binding CurrentPosition, Mode=TwoWay}"/>
+        <Button Margin="162,286,579.6,78" Command="{Binding PauseCommand}">
+            <Button.Background>
+                <ImageBrush ImageSource="Images/pause.jpg"/>
+            </Button.Background>
+           
+        </Button>
+        <Button Command="{Binding ContinueCommand}" Margin="232,286,514.6,78">
+            <Button.Background>
+                <ImageBrush ImageSource="Images/continue.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>

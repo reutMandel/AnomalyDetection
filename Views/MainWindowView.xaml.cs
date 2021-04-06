@@ -1,18 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Microsoft.Win32;
-using System.IO;
 using AnomalyDetection.ViewModel;
 using AnomalyDetection.Model;
 
@@ -31,5 +18,15 @@ namespace AnomalyDetection.Views
             this.mainWindowViewModel = new MainWindowViewModel(new FGModel());
             DataContext = mainWindowViewModel;
         }
+
+       private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(IsLoaded)
+            {
+               // mainWindowViewModel.SliderHandler(System.Int32.Parse(SlideController.Value.ToString()));
+                mainWindowViewModel.SliderHandler();
+            }
+        }
     }
+
 }

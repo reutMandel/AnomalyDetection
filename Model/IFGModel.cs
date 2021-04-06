@@ -15,8 +15,16 @@ namespace AnomalyDetection.Model
 
         string FgPath { get; set; }
 
+        int NumOfLines { get; set; }
+
+        int CurrentPosition { get; set; }
+
         void StartStimulate();
 
         void ReadCsvFile();
+
+        void ChangeStimulate();
+
+        void PauseStimulate();
     }
 }
