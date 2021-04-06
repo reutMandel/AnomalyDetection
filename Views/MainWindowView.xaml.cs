@@ -28,7 +28,7 @@ namespace AnomalyDetection.Views
         public MainWindowView()
         {
             InitializeComponent();
-            this.mainWindowViewModel = new MainWindowViewModel(new FGModel());
+            this.mainWindowViewModel = new MainWindowViewModel(FGModel.Instance);
             DataContext = mainWindowViewModel;
         }
     }

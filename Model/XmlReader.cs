@@ -67,4 +67,4 @@ namespace AnomalyDetection.Model
     }
 }
 
-//var names = data.Generic.Input.Chunks.Select(d => d.Name);
+

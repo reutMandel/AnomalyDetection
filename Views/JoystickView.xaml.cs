@@ -26,7 +26,7 @@ namespace AnomalyDetection.Views
         public JoystickView()
         {
             InitializeComponent();
-            joystickViewModel = new JoystickViewModel(new FGModel());
+            joystickViewModel = new JoystickViewModel(FGModel.Instance);
             DataContext = joystickViewModel;
         }
 

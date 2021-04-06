@@ -69,6 +69,7 @@
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IFGModel.cs" />
     <Compile Include="Model\JoystickProperties.cs" />
+    <Compile Include="Model\XmlParserUtil.cs" />
     <Compile Include="Model\XmlReader.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\JoystickViewModel.cs" />

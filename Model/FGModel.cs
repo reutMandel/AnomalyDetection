@@ -4,6 +4,8 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
+using System.Linq;
+using System.Globalization;
 
 namespace AnomalyDetection.Model
 {
@@ -15,6 +17,7 @@ namespace AnomalyDetection.Model
         private int numOfLines;
         private IClient client;
         private Thread thread;
+        private Dictionary<string,int> csvNames;
         private List<string> csvFile;
         public event PropertyChangedEventHandler PropertyChanged;
         public JoystickProperties JoystickProperties { get; set; }
@@ -24,6 +27,7 @@ namespace AnomalyDetection.Model
         private FGModel()
         {
             this.client = new Client("127.0.0.1", 5400);
+            JoystickProperties = new JoystickProperties();
         }
 
         public static FGModel Instance
@@ -33,7 +37,6 @@ namespace AnomalyDetection.Model
                 return instance;
             }
         }
-
 
         public string XmlPath
         {
@@ -88,8 +91,7 @@ namespace AnomalyDetection.Model
 
         public void ReadXmlFile()
         {
-            FGXmlReader.Reader(this.xmlPath);
-            NumOfLines = csvFile.Count;
+            csvNames = XmlParserUtil.Parse(FGXmlReader.Reader(this.xmlPath));
         }
 
         public void StartStimulate()
@@ -109,18 +111,29 @@ namespace AnomalyDetection.Model
             if (thread != null && thread.IsAlive)
                 thread.Abort();
 
-            thread = new Thread(() => {SendData(client, line); });
+            thread = new Thread(() => { Logic(client, line); });
      
             thread.Start();
         }
 
-        private void SendData(IClient client, int line)
+
+        private void Logic(IClient client, int line)
         {
             for (int i = line; i < numOfLines; i++)
             {
-                client.Send(Encoding.ASCII.GetBytes(csvFile[i]));
+                string currentLine = csvFile[i];
+                string[] values = currentLine.Split(',');
+                JoystickProperties.Rudder = float.Parse(values[csvNames["rudder"]], CultureInfo.InvariantCulture);
+                JoystickProperties.Throttle = float.Parse(values[csvNames["throttle"]], CultureInfo.InvariantCulture);
+                SendData(client, currentLine);
                 Thread.Sleep(100);
             }
+        }
+
+
+        private void SendData(IClient client, string line)
+        {
+            client.Send(Encoding.ASCII.GetBytes(line));
         }
     }
 }

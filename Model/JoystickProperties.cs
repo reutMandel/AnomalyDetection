@@ -4,12 +4,20 @@ namespace AnomalyDetection.Model
 {
     public class JoystickProperties : INotifyPropertyChanged
     {
-        private int rudder;
-        private int aileron;
-        private int elevator;
-        private int throttle;
+        private float rudder;
+        private float aileron;
+        private float elevator;
+        private float throttle;
 
-        public int Rudder
+        public JoystickProperties()
+        {
+            this.Rudder = 0;
+            this.Aileron = 0;
+            this.Elevator = 0;
+            this.Throttle = 0;
+        }
+
+        public float Rudder
         {
             get { return this.rudder; }
             set
@@ -19,7 +27,7 @@ namespace AnomalyDetection.Model
             }
         }
 
-        public int Aileron
+        public float Aileron
         {
             get { return this.aileron; }
             set
@@ -29,7 +37,7 @@ namespace AnomalyDetection.Model
             }
         }
 
-        public int Elevator
+        public float Elevator
         {
             get { return this.elevator; }
             set
@@ -39,7 +47,7 @@ namespace AnomalyDetection.Model
             }
         }
 
-        public int Throttle
+        public float Throttle
         {
             get { return this.throttle; }
             set
