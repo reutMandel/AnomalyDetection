@@ -17,12 +17,23 @@ namespace AnomalyDetection.Model
         private Thread thread;
         private List<string> csvFile;
         public event PropertyChangedEventHandler PropertyChanged;
-        public JoystickProperties JoystickProperties { get; set; } 
+        public JoystickProperties JoystickProperties { get; set; }
 
-        public FGModel()
+        private static readonly FGModel instance = new FGModel();
+
+        private FGModel()
         {
             this.client = new Client("127.0.0.1", 5400);
         }
+
+        public static FGModel Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
 
         public string XmlPath
         {
