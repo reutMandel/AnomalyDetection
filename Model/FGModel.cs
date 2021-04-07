@@ -20,7 +20,7 @@ namespace AnomalyDetection.Model
         private List<string> csvFile;
         private Dictionary<string, int> csvNames;
         public event PropertyChangedEventHandler PropertyChanged;
-        public JoystickProperties JoystickProperties { get; set; } 
+        public JoystickProperties Joystick { get; set; } 
 
         private static readonly FGModel instance = new FGModel();
 
@@ -28,7 +28,7 @@ namespace AnomalyDetection.Model
         {
             this.client = new Client("127.0.0.1", 5400);
             this.currentPosition = 0;
-            JoystickProperties = new JoystickProperties();
+            Joystick = new JoystickProperties();
         }
 
         public static FGModel Instance
@@ -137,8 +137,8 @@ namespace AnomalyDetection.Model
                 CurrentPosition = i;
                 string currentLine = csvFile[i];
                 string[] values = currentLine.Split(',');
-                JoystickProperties.Rudder = float.Parse(values[csvNames["rudder"]], CultureInfo.InvariantCulture);
-                JoystickProperties.Throttle = float.Parse(values[csvNames["throttle"]], CultureInfo.InvariantCulture);
+                Joystick.SetValues(values[Joystick.RudderPosition], values[Joystick.AileronPosition],
+                    values[Joystick.ElevatorPosition], values[Joystick.ThrottlePosition]);
                 SendData(client, currentLine);
                 Thread.Sleep(100);
             }

@@ -9,42 +9,44 @@ namespace AnomalyDetection.ViewModel
         public JoystickViewModel(IFGModel fgModel)
         {
             this.fgModel = fgModel;
-            fgModel.JoystickProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
+            fgModel.Joystick.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
+            Aileron = 0;
+            Elevator = 0;
         }
 
         public float Rudder
         {
-            get { return fgModel.JoystickProperties.Rudder; }
+            get { return fgModel.Joystick.Rudder; }
             set
             {
-                fgModel.JoystickProperties.Rudder = value;
+                fgModel.Joystick.Rudder = value;
                 NotifyPropertyChanged("Rudder");
             }
         }
         public float Aileron
         {
-            get { return fgModel.JoystickProperties.Aileron; }
+            get { return 60 * fgModel.Joystick.Aileron + 125; }
             set
             {
-                fgModel.JoystickProperties.Aileron = value;
+                fgModel.Joystick.Aileron = value;
                 NotifyPropertyChanged("Aileron");
             }
         }
         public float Elevator
         {
-            get { return fgModel.JoystickProperties.Elevator; }
+            get { return fgModel.Joystick.Elevator * 60 + 125; }
             set
             {
-                fgModel.JoystickProperties.Elevator = value;
+                fgModel.Joystick.Elevator = value;
                 NotifyPropertyChanged("Elevator");
             }
         }
         public float Throttle
         {
-            get { return fgModel.JoystickProperties.Throttle; }
+            get { return fgModel.Joystick.Throttle; }
             set
             {
-                fgModel.JoystickProperties.Throttle = value;
+                fgModel.Joystick.Throttle = value;
                 NotifyPropertyChanged("Throttle");
             }
         }

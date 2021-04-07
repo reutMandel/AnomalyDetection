@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 
 namespace AnomalyDetection.Model
 {
@@ -8,6 +10,7 @@ namespace AnomalyDetection.Model
         private float aileron;
         private float elevator;
         private float throttle;
+       
         public JoystickProperties()
         {
             this.Rudder = 0;
@@ -54,6 +57,27 @@ namespace AnomalyDetection.Model
                 throttle = value;
                 NotifyPropertyChanged("Throttle");
             }
+        }
+
+        public int RudderPosition { get; set; }
+        public int AileronPosition { get; set; }
+        public int ElevatorPosition { get; set; }
+        public int ThrottlePosition { get; set; }
+
+        public void SetPositions(Dictionary<string,int> names)
+        {
+            RudderPosition = names["rudder"];
+            AileronPosition = names["aileron"];
+            ElevatorPosition = names["elevator"];
+            ThrottlePosition = names["throttle"];
+        }
+
+        public void SetValues (string rudder, string aileron, string elevator, string throttle)
+        {
+            Rudder = float.Parse(rudder, CultureInfo.InvariantCulture);
+            Aileron = float.Parse(aileron, CultureInfo.InvariantCulture);
+            Elevator = float.Parse(elevator, CultureInfo.InvariantCulture);
+            Throttle = float.Parse(throttle, CultureInfo.InvariantCulture);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
