@@ -17,6 +17,7 @@ namespace AnomalyDetection.Model
         private int currentPosition;
         private IClient client;
         private Thread thread;
+        private bool stopThread;
         private List<string> csvFile;
         private Dictionary<string, int> csvNames;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,6 +30,7 @@ namespace AnomalyDetection.Model
             this.client = new Client("127.0.0.1", 5400);
             this.currentPosition = 0;
             Joystick = new JoystickProperties();
+            this.stopThread = false;
         }
 
         public static FGModel Instance
@@ -115,25 +117,25 @@ namespace AnomalyDetection.Model
 
         public void ChangeStimulate()
         {
-            if (thread != null && thread.IsAlive)
-                thread.Abort();
-
+            this.stopThread = false;
             thread = new Thread(() => {Logic(client, this.currentPosition); });
             thread.Start();
         }
 
         public void PauseStimulate()
         {
-            if(thread != null && thread.IsAlive)
-            {
-                thread.Abort();
-            }
+            this.stopThread = true;
+            this.thread.Join();
         }
 
         private void Logic(IClient client, int line)
         {
             for (int i = line; i < numOfLines; i++)
             {
+                if (this.stopThread)
+                {
+                    break;
+                }
                 CurrentPosition = i;
                 string currentLine = csvFile[i];
                 string[] values = currentLine.Split(',');
