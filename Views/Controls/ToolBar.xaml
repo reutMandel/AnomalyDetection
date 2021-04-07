@@ -31,6 +31,6 @@
             </Button>
         </Grid>
 
-        <Slider Grid.Row="1" x:Name="SlideController" Minimum="0" Maximum="{Binding NumOfLines}" TickPlacement="None" IsSnapToTickEnabled="True" ValueChanged="Slider_ValueChanged" Value="{Binding CurrentPosition, Mode=TwoWay}" Background="Black" Height="20"/>
+        <Slider Grid.Row="1" x:Name="SlideController" Minimum="0" Maximum="{Binding NumOfLines}" TickPlacement="None" IsSnapToTickEnabled="True" Value="{Binding CurrentPosition, Mode=TwoWay}" Background="Black" Height="20"/>
     </Grid>
 </UserControl>

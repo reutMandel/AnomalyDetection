@@ -19,13 +19,5 @@ namespace AnomalyDetection.Views.Controls
             this.toolBarViewModel = new ToolBarViewModel(FGModel.Instance);
             DataContext = toolBarViewModel;
         }
-
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //if (IsLoaded)
-            //{
-            //    toolBarViewModel.SliderHandler();
-            //}
-        }
     }
 }
