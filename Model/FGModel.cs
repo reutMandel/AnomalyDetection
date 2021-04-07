@@ -117,6 +117,7 @@ namespace AnomalyDetection.Model
 
         public void ChangeStimulate()
         {
+            //this.stopThread = this.thread != null ? true : false;
             this.stopThread = false;
             thread = new Thread(() => {Logic(client, this.currentPosition); });
             thread.Start();
@@ -133,9 +134,8 @@ namespace AnomalyDetection.Model
             for (int i = line; i < numOfLines; i++)
             {
                 if (this.stopThread)
-                {
                     break;
-                }
+
                 CurrentPosition = i;
                 string currentLine = csvFile[i];
                 string[] values = currentLine.Split(',');

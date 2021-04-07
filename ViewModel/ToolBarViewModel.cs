@@ -26,11 +26,13 @@ namespace AnomalyDetection.ViewModel
             {
                 fgModel.CurrentPosition = value;
                 NotifyPropertyChanged("CurrentPosition");
+                SliderHandler();
             }
         }
 
-        public void SlideHandler()
+        public void SliderHandler()
         {
+            fgModel.PauseStimulate();
             fgModel.ChangeStimulate();
         }
 

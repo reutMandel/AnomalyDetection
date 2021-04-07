@@ -22,10 +22,10 @@ namespace AnomalyDetection.Views.Controls
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (IsLoaded)
-            {
-                toolBarViewModel.SlideHandler();
-            }
+            //if (IsLoaded)
+            //{
+            //    toolBarViewModel.SliderHandler();
+            //}
         }
     }
 }
