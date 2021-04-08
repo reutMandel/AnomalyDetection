@@ -15,6 +15,7 @@ namespace AnomalyDetection.Model
         public JoystickProperties Joystick { get; set; } 
         public ToolBarProperties ToolBarProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
+        public FlightProperties FlightProperties { get; set; }
 
 
         private static readonly FGModel instance = new FGModel();
@@ -25,6 +26,7 @@ namespace AnomalyDetection.Model
             FilesData = new FilesDataProperties();
             Joystick = new JoystickProperties();
             ToolBarProperties = new ToolBarProperties();
+            FlightProperties = new FlightProperties();
             this.stopThread = false;
         }
 
@@ -46,6 +48,7 @@ namespace AnomalyDetection.Model
         {
             csvNames = XmlParserUtil.Parse(FGXmlReader.Reader(this.FilesData.XmlPath));
             Joystick.SetPositions(csvNames);
+            FlightProperties.SetPositions(csvNames);
         }
 
         public void StartStimulate()
@@ -93,11 +96,11 @@ namespace AnomalyDetection.Model
                 string[] values = currentLine.Split(',');
                 Joystick.SetValues(values[Joystick.RudderPosition], values[Joystick.AileronPosition],
                     values[Joystick.ElevatorPosition], values[Joystick.ThrottlePosition]);
+                FlightProperties.SetValues(values);
                 SendData(client, currentLine);
                 Thread.Sleep(ToolBarProperties.Sleep);
             }
         }
-
 
         private void SendData(IClient client, string line)
         {

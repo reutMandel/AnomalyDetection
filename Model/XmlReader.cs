@@ -66,5 +66,3 @@ namespace AnomalyDetection.Model
         public string Node { get; set; }
     }
 }
-
-//var names = data.Generic.Input.Chunks.Select(d => d.Name);

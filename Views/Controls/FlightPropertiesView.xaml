@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="AnomalyDetection.Views.Controls.FlightPropertiesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AnomalyDetection.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label Content="Direction: " FontSize="20" Width="100"></Label>
+                <Label Content="{Binding Direction}" FontSize="20" Width="150"></Label>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Ellipse Width="190" Height="190">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Images/compass.jpg"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Line  HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Red" StrokeThickness="3" X1="0" Y1="0" X2="0" Y2="-60" RenderTransformOrigin="0.5,0.5" >
+                    <Line.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding Direction}"/>
+                        </TransformGroup>
+                    </Line.RenderTransform>
+                </Line>
+
+                <Ellipse  HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="10" RenderTransformOrigin="0.5,0.5">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="Black" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label Content="Airspeed: " FontSize="20" Width="100"></Label>
+                <Label Content="{Binding Airspeed}" FontSize="20" Width="150"></Label>
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+
+                <Ellipse Width="190" Height="190">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Images/speedometer.jpg"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Red" StrokeThickness="2" X1="0" Y1="1" X2="0" Y2="-65" RenderTransformOrigin="0,0" >
+                    <Line.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding NormalizedAirspeed}"/>
+                        </TransformGroup>
+                    </Line.RenderTransform>
+                </Line>
+
+                <Ellipse  HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="10" RenderTransformOrigin="0.5,0.5">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="Black" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Label Content="Altimeter: " FontSize="20" Width="100"></Label>
+                <Label Content="{Binding Altimeter}" FontSize="20" Width="150"></Label>
+            </StackPanel>
+
+            <Grid Grid.Row="1" >
+                <Ellipse  Width="190" Height="190">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="../Images/clock3.jpg"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Line HorizontalAlignment="Center" VerticalAlignment="Center" Stroke="Red" StrokeThickness="4" X1="0" Y1="1" X2="0" Y2="-65" RenderTransformOrigin="0.5,0"  >
+                    <Line.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="{Binding NormalizedAltimeter}"/>
+                        </TransformGroup>
+                    </Line.RenderTransform>
+                </Line>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Pitch: " VerticalAlignment="Center" FontSize="25" ></Label>
+            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Pitch}" VerticalAlignment="Center" FontSize="25"></Label>
+            <Label Grid.Row="1" Grid.Column="0" Content="Roll: " VerticalAlignment="Center" FontSize="25"></Label>
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding Roll}" VerticalAlignment="Center"  FontSize="25"></Label>
+            <Label Grid.Row="2" Grid.Column="0" Content="Yaw: " VerticalAlignment="Center" FontSize="25"></Label>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Yaw}" VerticalAlignment="Center" FontSize="25"></Label>
+        </Grid>
+
+    </Grid>
+</UserControl>
