@@ -69,6 +69,7 @@
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IFGModel.cs" />
     <Compile Include="Model\JoystickProperties.cs" />
+    <Compile Include="Model\SpeedProperties.cs" />
     <Compile Include="Model\XmlParserUtil.cs" />
     <Compile Include="Model\XmlReader.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
@@ -131,6 +132,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Images\pause.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\forwardButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\backward.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

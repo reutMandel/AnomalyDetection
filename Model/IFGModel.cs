@@ -13,6 +13,7 @@ namespace AnomalyDetection.Model
         int CurrentPosition { get; set; }
 
         public JoystickProperties Joystick { get; set; }
+        public SpeedProperties SpeedProperties { get; set; }
         void StartStimulate();
         void ReadCsvFile();
         void ReadXmlFile();
@@ -20,5 +21,8 @@ namespace AnomalyDetection.Model
         void ChangeStimulate();
 
         void PauseStimulate();
+
+        void FastStimulate();
+        void SlowStimulate();
     }
 }

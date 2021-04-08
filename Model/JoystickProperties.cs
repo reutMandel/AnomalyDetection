@@ -74,6 +74,10 @@ namespace AnomalyDetection.Model
 
         public void SetValues (string rudder, string aileron, string elevator, string throttle)
         {
+            if(float.Parse(rudder, CultureInfo.InvariantCulture) != 0)
+            {
+                int x = 8;
+            }
             Rudder = float.Parse(rudder, CultureInfo.InvariantCulture);
             Aileron = float.Parse(aileron, CultureInfo.InvariantCulture);
             Elevator = float.Parse(elevator, CultureInfo.InvariantCulture);

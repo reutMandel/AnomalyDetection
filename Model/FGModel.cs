@@ -4,7 +4,6 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace AnomalyDetection.Model
 {
@@ -22,7 +21,7 @@ namespace AnomalyDetection.Model
         private Dictionary<string, int> csvNames;
         public event PropertyChangedEventHandler PropertyChanged;
         public JoystickProperties Joystick { get; set; } 
-
+        public SpeedProperties SpeedProperties { get; set; }
         private static readonly FGModel instance = new FGModel();
 
         private FGModel()
@@ -30,6 +29,7 @@ namespace AnomalyDetection.Model
             this.client = new Client("127.0.0.1", 5400);
             this.currentPosition = 0;
             Joystick = new JoystickProperties();
+            SpeedProperties = new SpeedProperties();
             this.stopThread = false;
         }
 
@@ -103,6 +103,7 @@ namespace AnomalyDetection.Model
         public void ReadXmlFile()
         {
             csvNames = XmlParserUtil.Parse(FGXmlReader.Reader(this.xmlPath));
+            Joystick.SetPositions(csvNames);
         }
 
         public void StartStimulate()
@@ -129,6 +130,16 @@ namespace AnomalyDetection.Model
             this.thread.Join();
         }
 
+        public void FastStimulate()
+        {
+            SpeedProperties.CalculateSleepThread(true);
+        }
+
+        public void SlowStimulate()
+        {
+            SpeedProperties.CalculateSleepThread(false);
+        }
+
         private void Logic(IClient client, int line)
         {
             for (int i = line; i < numOfLines; i++)
@@ -142,7 +153,7 @@ namespace AnomalyDetection.Model
                 Joystick.SetValues(values[Joystick.RudderPosition], values[Joystick.AileronPosition],
                     values[Joystick.ElevatorPosition], values[Joystick.ThrottlePosition]);
                 SendData(client, currentLine);
-                Thread.Sleep(100);
+                Thread.Sleep(SpeedProperties.Sleep);
             }
         }
 
