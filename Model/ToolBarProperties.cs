@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnomalyDetection.Model
 {
-    public class SpeedProperties : INotifyPropertyChanged
+    public class ToolBarProperties : Notify
     {
+        private int numOfLines;
+        private int currentPosition;
         private double speed;
-        private int sleep;
 
-        public SpeedProperties()
+        public ToolBarProperties()
         {
+            CurrentPosition = 0;
             Speed = 1;
             Sleep = 100;
         }
@@ -28,12 +25,25 @@ namespace AnomalyDetection.Model
             }
         }
 
-        public int Sleep
+        public int Sleep { get; set; }
+
+        public int NumOfLines
         {
-            get => this.sleep;
+            get { return numOfLines; }
             set
             {
-                this.sleep = value;
+                numOfLines = value;
+                NotifyPropertyChanged("NumOfLines");
+            }
+        }
+
+        public int CurrentPosition
+        {
+            get { return currentPosition; }
+            set
+            {
+                currentPosition = value;
+                NotifyPropertyChanged("CurrentPosition");
             }
         }
 
@@ -48,13 +58,6 @@ namespace AnomalyDetection.Model
                 Speed -= 0.25;
             }
             Sleep = Convert.ToInt32(1000 / (10 * Speed));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

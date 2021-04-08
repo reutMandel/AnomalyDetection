@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Text;
-using System.IO;
 using System.Threading;
 using System.Collections.Generic;
 
@@ -9,27 +7,24 @@ namespace AnomalyDetection.Model
 {
     public class FGModel : IFGModel
     {
-        private string xmlPath;
-        private string csvPath;
-        private string fgPath;
-        private int numOfLines;
-        private int currentPosition;
         private IClient client;
         private Thread thread;
         private bool stopThread;
         private List<string> csvFile;
         private Dictionary<string, int> csvNames;
-        public event PropertyChangedEventHandler PropertyChanged;
         public JoystickProperties Joystick { get; set; } 
-        public SpeedProperties SpeedProperties { get; set; }
+        public ToolBarProperties ToolBarProperties { get; set; }
+        public FilesDataProperties FilesData { get; set; }
+
+
         private static readonly FGModel instance = new FGModel();
 
         private FGModel()
         {
             this.client = new Client("127.0.0.1", 5400);
-            this.currentPosition = 0;
+            FilesData = new FilesDataProperties();
             Joystick = new JoystickProperties();
-            SpeedProperties = new SpeedProperties();
+            ToolBarProperties = new ToolBarProperties();
             this.stopThread = false;
         }
 
@@ -41,74 +36,21 @@ namespace AnomalyDetection.Model
             }
         }
 
-
-        public string XmlPath
-        {
-            get { return xmlPath; }
-            set
-            {
-                xmlPath = value;
-            }
-        }
-
-        public string CsvPath
-        {
-            get { return csvPath; }
-            set
-            {
-                csvPath = value;
-            }
-        }
-
-        public string FgPath
-        {
-            get { return fgPath; }
-            set
-            {
-                fgPath = value;
-            }
-        }
-
-        public int NumOfLines
-        {
-            get { return numOfLines; }
-            set
-            {
-                numOfLines = value;
-                NotifyPropertyChanged("NumOfLines");
-            }
-        }
-
-        public int CurrentPosition
-        {
-            get { return currentPosition; }
-            set
-            {
-                currentPosition = value;
-                NotifyPropertyChanged("CurrentPosition");
-            }
-        }
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-
         public void ReadCsvFile()
         {
-            csvFile = CsvReader.ReadCsvFile(this.csvPath);
-            NumOfLines = csvFile.Count;
+            csvFile = CsvReader.ReadCsvFile(this.FilesData.CsvPath);
+            ToolBarProperties.NumOfLines = csvFile.Count;
         }
 
         public void ReadXmlFile()
         {
-            csvNames = XmlParserUtil.Parse(FGXmlReader.Reader(this.xmlPath));
+            csvNames = XmlParserUtil.Parse(FGXmlReader.Reader(this.FilesData.XmlPath));
             Joystick.SetPositions(csvNames);
         }
 
         public void StartStimulate()
         {
-            if (this.csvPath == null || this.xmlPath == null)
+            if (this.FilesData.CsvPath == null || this.FilesData.XmlPath == null)
             {
                 throw new Exception("csv path or xml path are not valid"); // create new exception
             }
@@ -118,9 +60,8 @@ namespace AnomalyDetection.Model
 
         public void ChangeStimulate()
         {
-            //this.stopThread = this.thread != null ? true : false;
             this.stopThread = false;
-            thread = new Thread(() => {Logic(client, this.currentPosition); });
+            thread = new Thread(() => {Logic(client, ToolBarProperties.CurrentPosition); });
             thread.Start();
         }
 
@@ -132,28 +73,28 @@ namespace AnomalyDetection.Model
 
         public void FastStimulate()
         {
-            SpeedProperties.CalculateSleepThread(true);
+            ToolBarProperties.CalculateSleepThread(true);
         }
 
         public void SlowStimulate()
         {
-            SpeedProperties.CalculateSleepThread(false);
+            ToolBarProperties.CalculateSleepThread(false);
         }
 
         private void Logic(IClient client, int line)
         {
-            for (int i = line; i < numOfLines; i++)
+            for (int i = line; i < ToolBarProperties.NumOfLines; i++)
             {
                 if (this.stopThread)
                     break;
 
-                CurrentPosition = i;
+                ToolBarProperties.CurrentPosition = i;
                 string currentLine = csvFile[i];
                 string[] values = currentLine.Split(',');
                 Joystick.SetValues(values[Joystick.RudderPosition], values[Joystick.AileronPosition],
                     values[Joystick.ElevatorPosition], values[Joystick.ThrottlePosition]);
                 SendData(client, currentLine);
-                Thread.Sleep(SpeedProperties.Sleep);
+                Thread.Sleep(ToolBarProperties.Sleep);
             }
         }
 

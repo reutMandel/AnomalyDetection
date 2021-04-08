@@ -1,6 +1,5 @@
 ﻿using AnomalyDetection.Model;
 using Microsoft.Win32;
-using System.ComponentModel;
 using System.Windows.Input;
 
 namespace AnomalyDetection.ViewModel
@@ -18,7 +17,6 @@ namespace AnomalyDetection.ViewModel
         public MainWindowViewModel(IFGModel fgModel)
         {
             this.fgModel = fgModel;
-            fgModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged( e.PropertyName); };
             XmlButtonCommand = new DelegateCommand(o => XmlButtonClick());
             CsvButtonCommand = new DelegateCommand(o => CsvButtonClick());
             FgButtonCommand = new DelegateCommand(o => FgButtonClick());
@@ -32,30 +30,30 @@ namespace AnomalyDetection.ViewModel
 
         public string XmlFile
         {
-            get { return fgModel.XmlPath; }
+            get { return fgModel.FilesData.XmlPath; }
             set
             {
-                fgModel.XmlPath = value;
+                fgModel.FilesData.XmlPath = value;
                 NotifyPropertyChanged("XmlFile");
             }
         }
 
         public string CsvFile
         {
-            get { return fgModel.CsvPath; }
+            get { return fgModel.FilesData.CsvPath; }
             set
             {
-                fgModel.CsvPath = value;
+                fgModel.FilesData.CsvPath = value;
                 NotifyPropertyChanged("CsvFile");
             }
         }
 
         public string FgPath
         {
-            get { return fgModel.FgPath; }
+            get { return fgModel.FilesData.FgPath; }
             set
             {
-                fgModel.FgPath = value;
+                fgModel.FilesData.FgPath = value;
                 NotifyPropertyChanged("FgPath");
             }
         }

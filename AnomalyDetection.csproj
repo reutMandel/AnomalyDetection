@@ -63,13 +63,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\Notify.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\CsvReader.cs" />
     <Compile Include="Model\FGModel.cs" />
+    <Compile Include="Model\FilesDataProperties.cs" />
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IFGModel.cs" />
     <Compile Include="Model\JoystickProperties.cs" />
-    <Compile Include="Model\SpeedProperties.cs" />
+    <Compile Include="Model\ToolBarProperties.cs" />
     <Compile Include="Model\XmlParserUtil.cs" />
     <Compile Include="Model\XmlReader.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />

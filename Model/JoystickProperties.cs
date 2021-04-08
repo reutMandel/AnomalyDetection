@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 
 namespace AnomalyDetection.Model
 {
-    public class JoystickProperties : INotifyPropertyChanged
+    public class JoystickProperties : Notify
     {
         private float rudder;
         private float aileron;
@@ -74,20 +73,10 @@ namespace AnomalyDetection.Model
 
         public void SetValues (string rudder, string aileron, string elevator, string throttle)
         {
-            if(float.Parse(rudder, CultureInfo.InvariantCulture) != 0)
-            {
-                int x = 8;
-            }
             Rudder = float.Parse(rudder, CultureInfo.InvariantCulture);
             Aileron = float.Parse(aileron, CultureInfo.InvariantCulture);
             Elevator = float.Parse(elevator, CultureInfo.InvariantCulture);
             Throttle = float.Parse(throttle, CultureInfo.InvariantCulture);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged(string propName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

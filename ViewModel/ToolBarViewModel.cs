@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows.Input;
 using AnomalyDetection.Model;
 
@@ -18,13 +17,11 @@ namespace AnomalyDetection.ViewModel
         public ToolBarViewModel(IFGModel fgModel)
         {
             this.fgModel = fgModel;
-            fgModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
-            fgModel.SpeedProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
+            fgModel.ToolBarProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
             PauseCommand = new DelegateCommand(o => PauseSimulator());
             ContinueCommand = new DelegateCommand(o => ContinueSimulator());
             ForwardCommand = new DelegateCommand(o => FasterSimulate());
             BackwardCommand = new DelegateCommand(o => SlowerSimulate());
-
         }
 
         private void FasterSimulate()
@@ -39,10 +36,10 @@ namespace AnomalyDetection.ViewModel
 
         public int CurrentPosition
         {
-            get { return fgModel.CurrentPosition; }
+            get { return fgModel.ToolBarProperties.CurrentPosition; }
             set
             {
-                fgModel.CurrentPosition = value;
+                fgModel.ToolBarProperties.CurrentPosition = value;
                 NotifyPropertyChanged("CurrentPosition");
                 SliderHandler();
             }
@@ -50,7 +47,7 @@ namespace AnomalyDetection.ViewModel
 
         public double Speed
         {
-            get => fgModel.SpeedProperties.Speed;
+            get => fgModel.ToolBarProperties.Speed;
         }
 
         public void SliderHandler()
@@ -61,7 +58,7 @@ namespace AnomalyDetection.ViewModel
 
         public int NumOfLines
         {
-            get { return fgModel.NumOfLines; }
+            get { return fgModel.ToolBarProperties.NumOfLines; }
         }
 
         private void PauseSimulator()
@@ -74,6 +71,5 @@ namespace AnomalyDetection.ViewModel
         {
             fgModel.ChangeStimulate();
         }
-
     }
 }

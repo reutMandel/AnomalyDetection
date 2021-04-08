@@ -1,19 +1,11 @@
-﻿using System.ComponentModel;
-
-namespace AnomalyDetection.Model
+﻿namespace AnomalyDetection.Model
 {
-    public interface IFGModel : INotifyPropertyChanged
+    public interface IFGModel
     {
-        string XmlPath { get; set;}
-        string CsvPath { get; set;}
-        string FgPath { get; set; }
-
-        int NumOfLines { get; set; }
-
-        int CurrentPosition { get; set; }
 
         public JoystickProperties Joystick { get; set; }
-        public SpeedProperties SpeedProperties { get; set; }
+        public ToolBarProperties ToolBarProperties { get; set; }
+        public FilesDataProperties FilesData { get; set; }
         void StartStimulate();
         void ReadCsvFile();
         void ReadXmlFile();
