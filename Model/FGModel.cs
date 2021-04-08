@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 namespace AnomalyDetection.Model
 {
+    public delegate void NotifyEventHandler();
+
     public class FGModel : IFGModel
     {
         private IClient client;
@@ -15,7 +17,8 @@ namespace AnomalyDetection.Model
         public JoystickProperties Joystick { get; set; } 
         public ToolBarProperties ToolBarProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
-
+       
+        public event NotifyEventHandler LoadXmlCompleted;
 
         private static readonly FGModel instance = new FGModel();
 
@@ -27,6 +30,8 @@ namespace AnomalyDetection.Model
             ToolBarProperties = new ToolBarProperties();
             this.stopThread = false;
         }
+
+        public Dictionary<string, int> CsvNames { get => csvNames; }
 
         public static FGModel Instance
         {
@@ -46,6 +51,7 @@ namespace AnomalyDetection.Model
         {
             csvNames = XmlParserUtil.Parse(FGXmlReader.Reader(this.FilesData.XmlPath));
             Joystick.SetPositions(csvNames);
+            LoadXmlCompleted();
         }
 
         public void StartStimulate()

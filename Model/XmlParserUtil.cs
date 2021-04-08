@@ -10,8 +10,13 @@ namespace AnomalyDetection.Model
             List<Chunk> chunks = propertyList.Generic.Input.Chunks;
             for (int i = 0; i < chunks.Count; i++)
             {
-                if (!names.ContainsKey(chunks[i].Name))
+                if (names.ContainsKey(chunks[i].Name))
+                    names.Add(chunks[i].Name + "_1", i);
+                else
                     names.Add(chunks[i].Name, i);
+
+              //  if (!names.ContainsKey(chunks[i].Name))
+              //      names.Add(chunks[i].Name, i);
             }
             return names;
         }
