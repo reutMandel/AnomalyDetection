@@ -136,10 +136,10 @@
     <Resource Include="Views\Images\pause.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\forwardButton.png" />
+    <Resource Include="Views\Images\forward.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Views\Images\backward.png" />
+    <Resource Include="Views\Images\backward.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

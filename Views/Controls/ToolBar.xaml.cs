@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using AnomalyDetection.Model;
 using AnomalyDetection.ViewModel;
 
@@ -19,5 +19,6 @@ namespace AnomalyDetection.Views.Controls
             this.toolBarViewModel = new ToolBarViewModel(FGModel.Instance);
             DataContext = toolBarViewModel;
         }
+    
     }
 }

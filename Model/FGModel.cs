@@ -67,8 +67,11 @@ namespace AnomalyDetection.Model
 
         public void PauseStimulate()
         {
-            this.stopThread = true;
-            this.thread.Join();
+            if (thread != null)
+            {
+                this.stopThread = true;
+                this.thread.Join();
+            }
         }
 
         public void FastStimulate()
