@@ -62,7 +62,7 @@ namespace AnomalyDetection.ViewModel
             this.lineSeries = new LineSeries();
             this.isSelected = false;
             fgModel.CurrentPosition.PositionChanged += delegate () { UpdateGraph(); };
-            fgModel.ToolBarProperties.SpeedChanged += delegate () { ItemSelected(); };
+            fgModel.SpeedProperties.SpeedChanged += delegate () { ItemSelected(); };
             SetUpSelectedFieldModel();
         }
 
@@ -101,7 +101,7 @@ namespace AnomalyDetection.ViewModel
             values = fgModel.GetValuesByField(selectedField).Select(i=> double.Parse(i)).ToList();
             for (int i = 0; i < fgModel.CurrentPosition.Position; i++)
             {
-                lineSeries.Points.Add(new DataPoint(i * fgModel.ToolBarProperties.Sleep / 1000, values[i]));
+                lineSeries.Points.Add(new DataPoint(i * fgModel.SpeedProperties.Sleep / 1000, values[i]));
             }
             SelectedItemGraph.InvalidatePlot(true);
         }
@@ -115,7 +115,7 @@ namespace AnomalyDetection.ViewModel
             {
                 for(int i = size; i< fgModel.CurrentPosition.Position; i++)
                 {
-                    lineSeries.Points.Add(new DataPoint(i * fgModel.ToolBarProperties.Sleep / 1000, values[i]));
+                    lineSeries.Points.Add(new DataPoint(i * fgModel.SpeedProperties.Sleep / 1000, values[i]));
                 }
             }
             else if(size > fgModel.CurrentPosition.Position)

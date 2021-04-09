@@ -5,7 +5,7 @@ namespace AnomalyDetection.Model
     public interface IFGModel
     {
         public JoystickProperties Joystick { get; set; }
-        public ToolBarProperties ToolBarProperties { get; set; }
+        public SpeedProperties SpeedProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
         public GraphsLogic GraphsLogic { get; set; }
         public Dictionary<string, int> CsvNames { get; }

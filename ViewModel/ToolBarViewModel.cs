@@ -16,7 +16,7 @@ namespace AnomalyDetection.ViewModel
         public ToolBarViewModel(IFGModel fgModel)
         {
             this.fgModel = fgModel;
-            fgModel.ToolBarProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
+            fgModel.SpeedProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
             fgModel.CurrentPosition.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
             PauseCommand = new DelegateCommand(o => PauseSimulator());
             ContinueCommand = new DelegateCommand(o => ContinueSimulator());
@@ -47,7 +47,7 @@ namespace AnomalyDetection.ViewModel
 
         public double Speed
         {
-            get => fgModel.ToolBarProperties.Speed;
+            get => fgModel.SpeedProperties.Speed;
         }
 
         public void SliderHandler()
@@ -58,7 +58,7 @@ namespace AnomalyDetection.ViewModel
 
         public int NumOfLines
         {
-            get { return fgModel.ToolBarProperties.NumOfLines; }
+            get { return fgModel.SpeedProperties.NumOfLines; }
         }
 
         private void PauseSimulator()

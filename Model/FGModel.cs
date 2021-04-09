@@ -15,7 +15,7 @@ namespace AnomalyDetection.Model
         private List<string> csvFile;
         private Dictionary<string, int> csvNames;
         public JoystickProperties Joystick { get; set; } 
-        public ToolBarProperties ToolBarProperties { get; set; }
+        public SpeedProperties SpeedProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
         public FlightProperties FlightProperties { get; set; }
         public GraphsLogic GraphsLogic { get; set; }
@@ -32,7 +32,7 @@ namespace AnomalyDetection.Model
             this.client = new Client("127.0.0.1", 5400);
             FilesData = new FilesDataProperties();
             Joystick = new JoystickProperties();
-            ToolBarProperties = new ToolBarProperties();
+            SpeedProperties = new SpeedProperties();
             FlightProperties = new FlightProperties();
             GraphsLogic = new GraphsLogic();
             CurrentPosition = new CurrentPosition();
@@ -53,7 +53,7 @@ namespace AnomalyDetection.Model
         public void ReadCsvFile()
         {
             csvFile = CsvReader.ReadCsvFile(this.FilesData.CsvPath);
-            ToolBarProperties.NumOfLines = csvFile.Count;
+            SpeedProperties.NumOfLines = csvFile.Count;
         }
 
         public void ReadXmlFile()
@@ -93,12 +93,12 @@ namespace AnomalyDetection.Model
 
         public void FastStimulate()
         {
-            ToolBarProperties.CalculateSleepThread(true);
+            SpeedProperties.CalculateSleepThread(true);
         }
 
         public void SlowStimulate()
         {
-            ToolBarProperties.CalculateSleepThread(false);
+            SpeedProperties.CalculateSleepThread(false);
         }
 
         public List<string> GetValuesByField(string fieldName)
@@ -108,7 +108,7 @@ namespace AnomalyDetection.Model
 
         private void Logic(IClient client, int line)
         {
-            for (int i = line; i < ToolBarProperties.NumOfLines; i++)
+            for (int i = line; i < SpeedProperties.NumOfLines; i++)
             {
                 if (this.stopThread)
                     break;
@@ -120,7 +120,7 @@ namespace AnomalyDetection.Model
                     values[Joystick.ElevatorPosition], values[Joystick.ThrottlePosition]);
                 FlightProperties.SetValues(values);
                 SendData(client, currentLine);
-                Thread.Sleep(ToolBarProperties.Sleep);
+                Thread.Sleep(SpeedProperties.Sleep);
             }
         }
 

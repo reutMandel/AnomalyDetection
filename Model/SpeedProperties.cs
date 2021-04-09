@@ -2,14 +2,14 @@
 
 namespace AnomalyDetection.Model
 {
-    public class ToolBarProperties : Notify
+    public class SpeedProperties : Notify
     {
         private int numOfLines;
         private double speed;
         private int sleep;
         public event NotifyEventHandler SpeedChanged;
 
-        public ToolBarProperties()
+        public SpeedProperties()
         {
             Speed = 1;
             Sleep = 100;

@@ -83,7 +83,7 @@
     <Compile Include="Model\IClient.cs" />
     <Compile Include="Model\IFGModel.cs" />
     <Compile Include="Model\JoystickProperties.cs" />
-    <Compile Include="Model\ToolBarProperties.cs" />
+    <Compile Include="Model\SpeedProperties.cs" />
     <Compile Include="Model\XmlParserUtil.cs" />
     <Compile Include="Model\XmlReader.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
