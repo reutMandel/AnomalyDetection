@@ -37,9 +37,17 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=2.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +71,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\CsvParserUtil.cs" />
+    <Compile Include="Model\CurrentPosition.cs" />
+    <Compile Include="Model\GraphsLogic.cs" />
     <Compile Include="Model\FlightProperties.cs" />
     <Compile Include="Model\Notify.cs" />
     <Compile Include="Model\Client.cs" />
@@ -77,12 +88,16 @@
     <Compile Include="Model\XmlReader.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\FlightPropertiesViewModel.cs" />
+    <Compile Include="ViewModel\GraphsViewModel.cs" />
     <Compile Include="ViewModel\JoystickViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ToolBarViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="Views\Controls\FlightPropertiesView.xaml.cs">
       <DependentUpon>FlightPropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\GraphsView.xaml.cs">
+      <DependentUpon>GraphsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\JoystickView.xaml.cs">
       <DependentUpon>JoystickView.xaml</DependentUpon>
@@ -112,6 +127,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,6 +137,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Controls\GraphsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\FlightPropertiesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:AnomalyDetection.Views.Controls"
         mc:Ignorable="d"
-        Title="MainWindowView" Height="450" Width="800">
+        Title="MainWindowView" Height="700" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,13 +18,19 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <StackPanel HorizontalAlignment="Right" Grid.Column="3" Margin="0,0,-0.4,0">
             <Button x:Name="XmlButton" Content="choose xml file" Command="{Binding XmlButtonCommand}"  Width="100" Margin="10" Height="40"/>
             <Button x:Name="CsvButton" Content="choose csv file" Command="{Binding CsvButtonCommand}"  Margin="10"  Width="100" Height="40"/>
             <Button x:Name="FGButton" Content="flight gear path" Command="{Binding FgButtonCommand}"  Margin="10"  Width="100" Height="40"/>
             <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
         </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+            <Controls:GraphsView ></Controls:GraphsView>
+        </StackPanel>
+        <Viewbox>       
+            <Controls:JoystickView Grid.Column="0" Grid.Row="0" ></Controls:JoystickView>
+        </Viewbox>
         <Viewbox>
             <Controls:JoystickView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"></Controls:JoystickView>
         </Viewbox>

@@ -10,7 +10,6 @@ namespace AnomalyDetection.ViewModel
         public ICommand SliderCommand { get; set; }
         public ICommand PauseCommand { get; set; }
         public ICommand ContinueCommand { get; set; }
-
         public ICommand ForwardCommand { get; set; }
         public ICommand BackwardCommand { get; set; }
 
@@ -18,6 +17,7 @@ namespace AnomalyDetection.ViewModel
         {
             this.fgModel = fgModel;
             fgModel.ToolBarProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
+            fgModel.CurrentPosition.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
             PauseCommand = new DelegateCommand(o => PauseSimulator());
             ContinueCommand = new DelegateCommand(o => ContinueSimulator());
             ForwardCommand = new DelegateCommand(o => FasterSimulate());
@@ -34,13 +34,13 @@ namespace AnomalyDetection.ViewModel
             fgModel.SlowStimulate();
         }
 
-        public int CurrentPosition
+        public int Position
         {
-            get { return fgModel.ToolBarProperties.CurrentPosition; }
+            get { return fgModel.CurrentPosition.Position; }
             set
             {
-                fgModel.ToolBarProperties.CurrentPosition = value;
-                NotifyPropertyChanged("CurrentPosition");
+                fgModel.CurrentPosition.Position = value;
+                NotifyPropertyChanged("Position");
                 SliderHandler();
             }
         }

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 namespace AnomalyDetection.Model
 {
+    public delegate void NotifyEventHandler();
+
     public class FGModel : IFGModel
     {
         private IClient client;
@@ -16,6 +18,11 @@ namespace AnomalyDetection.Model
         public ToolBarProperties ToolBarProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
         public FlightProperties FlightProperties { get; set; }
+        public GraphsLogic GraphsLogic { get; set; }
+
+        public CurrentPosition CurrentPosition { get; set; }
+
+        public event NotifyEventHandler LoadXmlCompleted;
 
 
         private static readonly FGModel instance = new FGModel();
@@ -27,8 +34,12 @@ namespace AnomalyDetection.Model
             Joystick = new JoystickProperties();
             ToolBarProperties = new ToolBarProperties();
             FlightProperties = new FlightProperties();
+            GraphsLogic = new GraphsLogic();
+            CurrentPosition = new CurrentPosition();
             this.stopThread = false;
         }
+
+        public Dictionary<string, int> CsvNames { get => csvNames; }
 
         public static FGModel Instance
         {
@@ -37,6 +48,7 @@ namespace AnomalyDetection.Model
                 return instance;
             }
         }
+
 
         public void ReadCsvFile()
         {
@@ -49,10 +61,12 @@ namespace AnomalyDetection.Model
             csvNames = XmlParserUtil.Parse(FGXmlReader.Reader(this.FilesData.XmlPath));
             Joystick.SetPositions(csvNames);
             FlightProperties.SetPositions(csvNames);
+            LoadXmlCompleted();
         }
 
         public void StartStimulate()
         {
+            GraphsLogic.Columns = CsvParserUtil.convertLinesToColumns(csvFile, csvNames);
             if (this.FilesData.CsvPath == null || this.FilesData.XmlPath == null)
             {
                 throw new Exception("csv path or xml path are not valid"); // create new exception
@@ -64,7 +78,7 @@ namespace AnomalyDetection.Model
         public void ChangeStimulate()
         {
             this.stopThread = false;
-            thread = new Thread(() => {Logic(client, ToolBarProperties.CurrentPosition); });
+            thread = new Thread(() => {Logic(client, CurrentPosition.Position); });
             thread.Start();
         }
 
@@ -87,6 +101,11 @@ namespace AnomalyDetection.Model
             ToolBarProperties.CalculateSleepThread(false);
         }
 
+        public List<string> GetValuesByField(string fieldName)
+        {
+            return GraphsLogic.GetValuesByFieldName(fieldName);
+        }
+
         private void Logic(IClient client, int line)
         {
             for (int i = line; i < ToolBarProperties.NumOfLines; i++)
@@ -94,7 +113,7 @@ namespace AnomalyDetection.Model
                 if (this.stopThread)
                     break;
 
-                ToolBarProperties.CurrentPosition = i;
+                CurrentPosition.Position = i;
                 string currentLine = csvFile[i];
                 string[] values = currentLine.Split(',');
                 Joystick.SetValues(values[Joystick.RudderPosition], values[Joystick.AileronPosition],

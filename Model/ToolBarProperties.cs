@@ -5,12 +5,12 @@ namespace AnomalyDetection.Model
     public class ToolBarProperties : Notify
     {
         private int numOfLines;
-        private int currentPosition;
         private double speed;
+        private int sleep;
+        public event NotifyEventHandler SpeedChanged;
 
         public ToolBarProperties()
         {
-            CurrentPosition = 0;
             Speed = 1;
             Sleep = 100;
         }
@@ -22,10 +22,19 @@ namespace AnomalyDetection.Model
             {
                 this.speed = value;
                 NotifyPropertyChanged("Speed");
+               // SpeedChanged?.Invoke();
             }
         }
 
-        public int Sleep { get; set; }
+        public int Sleep
+        {
+            get => this.sleep;
+            set
+            {
+                this.sleep = value;
+                SpeedChanged?.Invoke();
+            }
+        }
 
         public int NumOfLines
         {
@@ -34,16 +43,6 @@ namespace AnomalyDetection.Model
             {
                 numOfLines = value;
                 NotifyPropertyChanged("NumOfLines");
-            }
-        }
-
-        public int CurrentPosition
-        {
-            get { return currentPosition; }
-            set
-            {
-                currentPosition = value;
-                NotifyPropertyChanged("CurrentPosition");
             }
         }
 

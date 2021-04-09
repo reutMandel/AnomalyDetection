@@ -39,6 +39,6 @@
             <Label Content="{Binding Speed}" VerticalAlignment="Center" FontSize="20" BorderThickness="0.5" BorderBrush="Black"></Label>
            
         </StackPanel>
-        <Slider Grid.Row="1" x:Name="SlideController" Minimum="0" Maximum="{Binding NumOfLines}" IsSnapToTickEnabled="True" Value="{Binding CurrentPosition, Mode=TwoWay}" Background="Black" Height="20"/>
+        <Slider Grid.Row="1" x:Name="SlideController" Minimum="0" Maximum="{Binding NumOfLines}" IsSnapToTickEnabled="True" Value="{Binding Position, Mode=TwoWay}" Background="Black" Height="20"/>
     </Grid>
 </UserControl>
