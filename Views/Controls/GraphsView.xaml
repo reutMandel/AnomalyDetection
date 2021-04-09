@@ -9,22 +9,17 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" ItemsSource="{Binding FieldsName, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                 Height="250" Width="250" FontSize="12" SelectedItem ="{Binding SelectedField, Mode=TwoWay}">
+        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding FieldsName, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 Height="250" Width="150" FontSize="12"  SelectionChanged="ListBox_SelectionChanged" SelectedItem ="{Binding SelectedField, Mode=TwoWay}">
         </ListBox>
-        <oxy:Plot Grid.Row="0" Grid.Column="2" Title="{Binding Tilte}">
-            <oxy:Plot.Series>
-                <oxy:LineSeries ItemsSource="{Binding Points}"/>
-            </oxy:Plot.Series>
-        </oxy:Plot>
-
+        <oxy:PlotView Model="{Binding SelectedItemGraph, Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
     </Grid>
 </UserControl>

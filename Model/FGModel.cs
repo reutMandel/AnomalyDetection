@@ -17,8 +17,12 @@ namespace AnomalyDetection.Model
         public JoystickProperties Joystick { get; set; } 
         public ToolBarProperties ToolBarProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
-       
+        public GraphsLogic GraphsLogic { get; set; }
+
+        public CurrentPosition CurrentPosition { get; set; }
+
         public event NotifyEventHandler LoadXmlCompleted;
+
 
         private static readonly FGModel instance = new FGModel();
 
@@ -28,6 +32,8 @@ namespace AnomalyDetection.Model
             FilesData = new FilesDataProperties();
             Joystick = new JoystickProperties();
             ToolBarProperties = new ToolBarProperties();
+            GraphsLogic = new GraphsLogic();
+            CurrentPosition = new CurrentPosition();
             this.stopThread = false;
         }
 
@@ -40,6 +46,7 @@ namespace AnomalyDetection.Model
                 return instance;
             }
         }
+
 
         public void ReadCsvFile()
         {
@@ -56,6 +63,7 @@ namespace AnomalyDetection.Model
 
         public void StartStimulate()
         {
+            GraphsLogic.Columns = CsvParserUtil.convertLinesToColumns(csvFile, csvNames);
             if (this.FilesData.CsvPath == null || this.FilesData.XmlPath == null)
             {
                 throw new Exception("csv path or xml path are not valid"); // create new exception
@@ -67,7 +75,7 @@ namespace AnomalyDetection.Model
         public void ChangeStimulate()
         {
             this.stopThread = false;
-            thread = new Thread(() => {Logic(client, ToolBarProperties.CurrentPosition); });
+            thread = new Thread(() => {Logic(client, CurrentPosition.Position); });
             thread.Start();
         }
 
@@ -90,6 +98,11 @@ namespace AnomalyDetection.Model
             ToolBarProperties.CalculateSleepThread(false);
         }
 
+        public List<string> GetValuesByField(string fieldName)
+        {
+            return GraphsLogic.GetValuesByFieldName(fieldName);
+        }
+
         private void Logic(IClient client, int line)
         {
             for (int i = line; i < ToolBarProperties.NumOfLines; i++)
@@ -97,7 +110,7 @@ namespace AnomalyDetection.Model
                 if (this.stopThread)
                     break;
 
-                ToolBarProperties.CurrentPosition = i;
+                CurrentPosition.Position = i;
                 string currentLine = csvFile[i];
                 string[] values = currentLine.Split(',');
                 Joystick.SetValues(values[Joystick.RudderPosition], values[Joystick.AileronPosition],

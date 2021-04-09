@@ -7,7 +7,9 @@ namespace AnomalyDetection.Model
         public JoystickProperties Joystick { get; set; }
         public ToolBarProperties ToolBarProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
+        public GraphsLogic GraphsLogic { get; set; }
         public Dictionary<string, int> CsvNames { get; }
+        public CurrentPosition CurrentPosition { get; set; }
 
         public event NotifyEventHandler LoadXmlCompleted;
         void StartStimulate();
@@ -17,5 +19,6 @@ namespace AnomalyDetection.Model
         void PauseStimulate();
         void FastStimulate();
         void SlowStimulate();
+        List<string> GetValuesByField(string fieldName);
     }
 }

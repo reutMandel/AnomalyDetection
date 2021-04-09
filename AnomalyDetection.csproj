@@ -71,7 +71,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Graphs.cs" />
+    <Compile Include="Model\CsvParserUtil.cs" />
+    <Compile Include="Model\CurrentPosition.cs" />
+    <Compile Include="Model\GraphsLogic.cs" />
     <Compile Include="Model\Notify.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\CsvReader.cs" />

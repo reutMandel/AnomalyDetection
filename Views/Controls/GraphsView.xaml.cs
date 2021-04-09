@@ -29,5 +29,10 @@ namespace AnomalyDetection.Views.Controls
             graphsViewModel = new GraphsViewModel(FGModel.Instance);
             DataContext = graphsViewModel;
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            graphsViewModel.ItemSelected();
+        }
     }
 }
