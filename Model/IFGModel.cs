@@ -2,10 +2,10 @@
 {
     public interface IFGModel
     {
-
         public JoystickProperties Joystick { get; set; }
         public ToolBarProperties ToolBarProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
+        public FlightProperties FlightProperties { get; set; }
         void StartStimulate();
         void ReadCsvFile();
         void ReadXmlFile();

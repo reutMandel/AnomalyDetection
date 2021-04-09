@@ -25,7 +25,13 @@
             <Button x:Name="FGButton" Content="flight gear path" Command="{Binding FgButtonCommand}"  Margin="10"  Width="100" Height="40"/>
             <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
         </StackPanel>
-        <Controls:JoystickView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"></Controls:JoystickView>
+        <Viewbox>
+            <Controls:JoystickView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"></Controls:JoystickView>
+        </Viewbox>
+        <Viewbox Grid.Column="0" Grid.Row="1">
+            <Controls:FlightPropertiesView ></Controls:FlightPropertiesView>
+        </Viewbox>
+        
         <Controls:ToolBar Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"></Controls:ToolBar>
     </Grid>
 </Window>
