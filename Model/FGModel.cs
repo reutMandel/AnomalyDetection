@@ -101,7 +101,12 @@ namespace AnomalyDetection.Model
             SpeedProperties.CalculateSleepThread(false);
         }
 
-        public List<string> GetValuesByField(string fieldName)
+        public string GetCorrelatedField(string fieldName)
+        {
+            return GraphsLogic.GetCorrelatedField(fieldName);
+        }
+
+        public List<double> GetValuesByField(string fieldName)
         {
             return GraphsLogic.GetValuesByFieldName(fieldName);
         }

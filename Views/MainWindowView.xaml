@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:AnomalyDetection.Views.Controls"
         mc:Ignorable="d"
-        Title="MainWindowView" Height="700" Width="1000">
+        Title="MainWindowView" WindowState="Maximized" Height="800" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,9 +25,11 @@
             <Button x:Name="FGButton" Content="flight gear path" Command="{Binding FgButtonCommand}"  Margin="10"  Width="100" Height="40"/>
             <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
         </StackPanel>
+        
         <StackPanel Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
             <Controls:GraphsView ></Controls:GraphsView>
         </StackPanel>
+            
         <Viewbox>       
             <Controls:JoystickView Grid.Column="0" Grid.Row="0" ></Controls:JoystickView>
         </Viewbox>

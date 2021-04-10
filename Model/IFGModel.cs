@@ -20,6 +20,7 @@ namespace AnomalyDetection.Model
         void PauseStimulate();
         void FastStimulate();
         void SlowStimulate();
-        List<string> GetValuesByField(string fieldName);
+        string GetCorrelatedField(string fieldName);
+        List<double> GetValuesByField(string fieldName);
     }
 }

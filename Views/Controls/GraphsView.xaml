@@ -20,6 +20,9 @@
         <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding FieldsName, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible"
                  Height="250" Width="150" FontSize="12"  SelectionChanged="ListBox_SelectionChanged" SelectedItem ="{Binding SelectedField, Mode=TwoWay}">
         </ListBox>
-        <oxy:PlotView Model="{Binding SelectedItemGraph, Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
+        
+        <oxy:PlotView Model="{Binding SelectedItemGraph, Mode=TwoWay}" Grid.Column="1" Width="250" Grid.Row="0"/>
+        
+        <oxy:PlotView Model="{Binding CorrelatedGraph, Mode=TwoWay}" Grid.Column="2" Width="250" Grid.Row="0"/>
     </Grid>
 </UserControl>

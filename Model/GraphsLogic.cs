@@ -4,11 +4,16 @@ namespace AnomalyDetection.Model
 {
     public class GraphsLogic : Notify
     {
-       public Dictionary<string, List<string>> Columns { get; set; }
+        public Dictionary<string, List<double>> Columns { get; set; }
 
-       public List<string> GetValuesByFieldName (string fieldName)
-       {
+        public List<double> GetValuesByFieldName(string fieldName)
+        {
             return Columns[fieldName];
-       }    
+        }
+
+        public string GetCorrelatedField(string fieldName)
+        {
+            return AnomalyDetectionLogic.FindCorrelated(Columns, fieldName);
+        }
     }
 }

@@ -71,6 +71,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Model\AnomalyDetectionLogic.cs" />
+    <Compile Include="Model\AnomalyDetectionUtil.cs" />
     <Compile Include="Model\CsvParserUtil.cs" />
     <Compile Include="Model\CurrentPosition.cs" />
     <Compile Include="Model\GraphsLogic.cs" />

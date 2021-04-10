@@ -7,12 +7,12 @@ namespace AnomalyDetection.Model
     public class CsvParserUtil
     {
 
-        public static Dictionary<string,List<string>> convertLinesToColumns (List<string> lines, Dictionary<string,int> csvNames) 
+        public static Dictionary<string,List<double>> convertLinesToColumns (List<string> lines, Dictionary<string,int> csvNames) 
         {
-            Dictionary<string, List<string>> columns = new Dictionary<string, List<string>>();
+            Dictionary<string, List<double>> columns = new Dictionary<string, List<double>>();
             foreach(var i in csvNames.Keys)
             {
-                columns.Add(i, new List<string>());
+                columns.Add(i, new List<double>());
             }
 
             for (int i =0; i< lines.Count; i++)
@@ -21,7 +21,7 @@ namespace AnomalyDetection.Model
                 for(int j = 0; j< values.Length; j++)
                 {
                     string index = csvNames.FirstOrDefault(x => x.Value == j).Key;
-                    columns[index].Add(values[j]);
+                    columns[index].Add(double.Parse(values[j]));
                 }
             }
             return columns;
