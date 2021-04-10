@@ -14,7 +14,7 @@ namespace AnomalyDetection.Model
         private bool stopThread;
         private List<string> csvFile;
         private Dictionary<string, int> csvNames;
-        public JoystickProperties Joystick { get; set; } 
+        public JoystickProperties Joystick { get; set; }
         public SpeedProperties SpeedProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
         public FlightProperties FlightProperties { get; set; }
@@ -49,7 +49,6 @@ namespace AnomalyDetection.Model
             }
         }
 
-
         public void ReadCsvFile()
         {
             csvFile = CsvReader.ReadCsvFile(this.FilesData.CsvPath);
@@ -78,7 +77,7 @@ namespace AnomalyDetection.Model
         public void ChangeStimulate()
         {
             this.stopThread = false;
-            thread = new Thread(() => {Logic(client, CurrentPosition.Position); });
+            thread = new Thread(() => { Logic(client, CurrentPosition.Position); });
             thread.Start();
         }
 
@@ -109,6 +108,11 @@ namespace AnomalyDetection.Model
         public List<double> GetValuesByField(string fieldName)
         {
             return GraphsLogic.GetValuesByFieldName(fieldName);
+        }
+
+        public Line GetLinearReg(string field1, string field2)
+        {
+            return GraphsLogic.GetLinearReg(field1, field2);
         }
 
         private void Logic(IClient client, int line)

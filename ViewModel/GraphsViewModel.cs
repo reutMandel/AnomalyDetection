@@ -5,6 +5,7 @@ using System.Linq;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using OxyPlot.Annotations;
 
 namespace AnomalyDetection.ViewModel
 {
@@ -14,9 +15,11 @@ namespace AnomalyDetection.ViewModel
         private ObservableCollection<string> fieldsName;
         private PlotModel selectedItemGraph;
         private PlotModel correlatedGraph;
+        private PlotModel linearRegGraph;
         private string selectedField;
         private LineSeries selectedItemLineSeries;
         private LineSeries correlatedLineSeries;
+        private LineAnnotation linearRegLineAnnotation;
         private List<double> values;
         private List<double> correlatedValues;
         private string correlatedField;
@@ -55,6 +58,16 @@ namespace AnomalyDetection.ViewModel
             }
         }
 
+        public PlotModel LinearRegGraph
+        {
+            get => this.linearRegGraph;
+            set
+            {
+                this.linearRegGraph = value;
+                NotifyPropertyChanged("LinearRegGraph");
+            }
+        }
+
         public string SelectedField
         {
             get { return this.selectedField; }
@@ -87,11 +100,14 @@ namespace AnomalyDetection.ViewModel
             this.FieldsName = new ObservableCollection<string>();
             this.SelectedItemGraph = new PlotModel();
             this.CorrelatedGraph = new PlotModel();
+            this.LinearRegGraph = new PlotModel();
             this.selectedItemLineSeries = new LineSeries();
             this.correlatedLineSeries = new LineSeries();
+            this.linearRegLineAnnotation = new LineAnnotation();
             
             SetUpSelectedFieldModel();
             SetUpCorrelatedFieldModel();
+            SetUpLinearRegdModel();
         }
 
         public void InsertFieldsName()
@@ -143,6 +159,31 @@ namespace AnomalyDetection.ViewModel
             CorrelatedGraph.Series.Add(correlatedLineSeries);
         }
 
+        private void SetUpLinearRegdModel()
+        {
+            LinearRegGraph.Title = "LinearReg";
+            //LineAnnotation k = new LineAnnotation();
+           // k.Intercept = 0;
+            //k.Slope = 5;
+            var fieldAxis = new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Title = "Selected Item",
+                //MajorGridlineStyle = LineStyle.Solid,
+               // MinorGridlineStyle = LineStyle.Solid
+            };
+            LinearRegGraph.Axes.Add(fieldAxis);
+            var valueAxis = new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Title = "Correlated Item",
+              //  MajorGridlineStyle = LineStyle.Solid,
+              //  MinorGridlineStyle = LineStyle.Solid
+            };
+            LinearRegGraph.Axes.Add(valueAxis);
+            this.linearRegLineAnnotation.LineStyle = LineStyle.Solid;
+            LinearRegGraph.Annotations.Add(linearRegLineAnnotation);
+        }
         public void ItemSelected()
         {
             this.CorrelatedField = this.fgModel.GetCorrelatedField(selectedField);
@@ -151,6 +192,10 @@ namespace AnomalyDetection.ViewModel
             SelectedItemGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left).Title = this.selectedField;
             this.values = fgModel.GetValuesByField(selectedField);
             SetAllLineSeries();
+            Line line = this.fgModel.GetLinearReg(this.SelectedField, this.CorrelatedField);
+            this.linearRegLineAnnotation.Slope = line.A;
+            this.linearRegLineAnnotation.Intercept = line.B;
+            this.LinearRegGraph.InvalidatePlot(true);
             this.isSelected = true;
         }
 

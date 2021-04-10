@@ -45,38 +45,44 @@ namespace AnomalyDetection.Model
             return Cov(x, y, size) / denominator;
         }
 
-        public static void FindCorrelated()
-        {
-
-        }
         // performs a linear regression and returns the line equation
-        //Line linear_reg(Point** points, int size)
-        //{
-        //    float* x = new float[size];
-        //    float* y = new float[size];
-        //    for (int i = 0; i < size; i++)
-        //    {
-        //        x[i] = points[i]->x;
-        //        y[i] = points[i]->y;
-        //    }
-        //    float a = cov(x, y, size) / var(x, size);
-        //    float b = avg(y, size) - a * avg(x, size);
-        //    delete(x);
-        //    delete(y);
-        //    return Line(a, b);
-        //}
+        public static Line LinearReg(Point[] points, int size)
+        {
+            double[] x = new double[size];
+            double[] y = new double[size];
+            for (int i = 0; i < size; i++)
+            {
+                x[i] = points[i].X;
+                y[i] = points[i].Y;
+            }
+            double a = Cov(x, y, size) / Var(x, size);
+            double b = Avg(y, size) - a * Avg(x, size);
+            return new Line(a, b);
+        }
 
-        // returns the deviation between point p and the line equation of the points
-        //float dev(Point p, Point** points, int size)
-        //{
-        //    Line line = linear_reg(points, size);
-        //    return dev(p, line);
-        //}
+       // returns the deviation between point p and the line equation of the points
+        public static double Dev(Point p, Point[] points, int size)
+        {
+            Line line = LinearReg(points, size);
+            return Dev(p, line);
+        }
 
-        //// returns the deviation between point p and the line
-        //float dev(Point p, Line l)
-        //{
-        //    return std::abs(l.f(p.x) - p.y);
-        //}
+        // returns the deviation between point p and the line
+        public static double Dev(Point p, Line l)
+        {
+            return Math.Abs(l.F(p.X) - p.Y);
+        }
+    }
+
+    public class Point 
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+
+        public Point(double x, double y)
+        {
+            this.X = x;
+            this.Y = y;  
+        }
     }
 }

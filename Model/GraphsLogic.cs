@@ -15,5 +15,10 @@ namespace AnomalyDetection.Model
         {
             return AnomalyDetectionLogic.FindCorrelated(Columns, fieldName);
         }
+
+        public Line GetLinearReg(string field1, string field2)
+        {
+            return AnomalyDetectionLogic.FindLinearReg(Columns, field1, field2);
+        }
     }
 }
