@@ -19,12 +19,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel HorizontalAlignment="Right" Grid.Column="3" Margin="0,0,-0.4,0">
-            <Button x:Name="XmlButton" Content="choose xml file" Command="{Binding XmlButtonCommand}"  Width="100" Margin="10" Height="40"/>
-            <Button x:Name="CsvButton" Content="choose csv file" Command="{Binding CsvButtonCommand}"  Margin="10"  Width="100" Height="40"/>
-            <Button x:Name="FGButton" Content="flight gear path" Command="{Binding FgButtonCommand}"  Margin="10"  Width="100" Height="40"/>
-            <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
-        </StackPanel>
+        <Controls:UploadFilesView Grid.Column="3"></Controls:UploadFilesView>
         
         <StackPanel Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
             <Controls:GraphsView ></Controls:GraphsView>

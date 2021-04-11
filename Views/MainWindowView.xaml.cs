@@ -1,7 +1,4 @@
-﻿
-using System.Windows;
-using AnomalyDetection.ViewModel;
-using AnomalyDetection.Model;
+﻿using System.Windows;
 
 namespace AnomalyDetection.Views
 {
@@ -10,14 +7,9 @@ namespace AnomalyDetection.Views
     /// </summary>
     public partial class MainWindowView : Window
     {
-        private MainWindowViewModel mainWindowViewModel;
-
         public MainWindowView()
         {
             InitializeComponent();
-            this.mainWindowViewModel = new MainWindowViewModel(FGModel.Instance);
-            DataContext = mainWindowViewModel;
         }
     }
-
 }

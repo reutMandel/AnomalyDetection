@@ -94,8 +94,8 @@
     <Compile Include="ViewModel\FlightPropertiesViewModel.cs" />
     <Compile Include="ViewModel\GraphsViewModel.cs" />
     <Compile Include="ViewModel\JoystickViewModel.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ToolBarViewModel.cs" />
+    <Compile Include="ViewModel\UploadFilesViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="Views\Controls\FlightPropertiesView.xaml.cs">
       <DependentUpon>FlightPropertiesView.xaml</DependentUpon>
@@ -108,6 +108,9 @@
     </Compile>
     <Compile Include="Views\Controls\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\UploadFilesView.xaml.cs">
+      <DependentUpon>UploadFilesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
@@ -154,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\UploadFilesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
