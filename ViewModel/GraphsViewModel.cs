@@ -20,8 +20,10 @@ namespace AnomalyDetection.ViewModel
         private LineSeries selectedItemLineSeries;
         private LineSeries correlatedLineSeries;
         private LineAnnotation linearRegLineAnnotation;
+        private ScatterSeries scatterSeries;
         private List<double> values;
         private List<double> correlatedValues;
+        private List<Point> linearegPoints;
         private string correlatedField;
         private bool isSelected;
 
@@ -95,7 +97,7 @@ namespace AnomalyDetection.ViewModel
             this.isSelected = false;
             this.fgModel = fgModel;
             this.fgModel.CurrentPosition.PositionChanged += delegate () { UpdateGraph(); };
-            this.fgModel.SpeedProperties.SpeedChanged += delegate () { SetAllLineSeries(); };
+            this.fgModel.SpeedProperties.SpeedChanged += delegate () { SpeedChangeHandler(); };
             this.fgModel.LoadXmlCompleted += delegate () { InsertFieldsName(); };
             this.FieldsName = new ObservableCollection<string>();
             this.SelectedItemGraph = new PlotModel();
@@ -104,7 +106,8 @@ namespace AnomalyDetection.ViewModel
             this.selectedItemLineSeries = new LineSeries();
             this.correlatedLineSeries = new LineSeries();
             this.linearRegLineAnnotation = new LineAnnotation();
-            
+            this.scatterSeries = new ScatterSeries();
+
             SetUpSelectedFieldModel();
             SetUpCorrelatedFieldModel();
             SetUpLinearRegdModel();
@@ -162,41 +165,80 @@ namespace AnomalyDetection.ViewModel
         private void SetUpLinearRegdModel()
         {
             LinearRegGraph.Title = "LinearReg";
-            //LineAnnotation k = new LineAnnotation();
-           // k.Intercept = 0;
-            //k.Slope = 5;
+
             var fieldAxis = new LinearAxis
             {
                 Position = AxisPosition.Bottom,
-                Title = "Selected Item",
-                //MajorGridlineStyle = LineStyle.Solid,
-               // MinorGridlineStyle = LineStyle.Solid
+                Title = "Selected Item"
             };
             LinearRegGraph.Axes.Add(fieldAxis);
             var valueAxis = new LinearAxis
             {
                 Position = AxisPosition.Left,
-                Title = "Correlated Item",
-              //  MajorGridlineStyle = LineStyle.Solid,
-              //  MinorGridlineStyle = LineStyle.Solid
+                Title = "Correlated Item"
             };
             LinearRegGraph.Axes.Add(valueAxis);
             this.linearRegLineAnnotation.LineStyle = LineStyle.Solid;
             LinearRegGraph.Annotations.Add(linearRegLineAnnotation);
+            this.scatterSeries.MarkerType = MarkerType.Circle;
+            this.scatterSeries.MarkerSize = 1.5;
+            LinearRegGraph.Series.Add(this.scatterSeries);
         }
+
         public void ItemSelected()
         {
             this.CorrelatedField = this.fgModel.GetCorrelatedField(selectedField);
-            this.correlatedValues = this.fgModel.GetValuesByField(this.CorrelatedField);  
+            this.correlatedValues = this.fgModel.GetValuesByField(this.CorrelatedField);
             CorrelatedGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left).Title = this.correlatedField;
             SelectedItemGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left).Title = this.selectedField;
             this.values = fgModel.GetValuesByField(selectedField);
             SetAllLineSeries();
-            Line line = this.fgModel.GetLinearReg(this.SelectedField, this.CorrelatedField);
-            this.linearRegLineAnnotation.Slope = line.A;
-            this.linearRegLineAnnotation.Intercept = line.B;
-            this.LinearRegGraph.InvalidatePlot(true);
+            SetLinearReg();
             this.isSelected = true;
+        }
+
+        private void SetScatterSeries()
+        {
+            this.scatterSeries.Points.Clear();
+            int currentPosition = this.fgModel.CurrentPosition.Position;
+            double time = this.fgModel.CurrentPosition.Position * this.fgModel.SpeedProperties.Sleep / 1000;
+            if (time < 30)
+            {
+                int i;
+                for (i = 0; i < currentPosition; i++)
+                {
+                    this.scatterSeries.Points.Add(new ScatterPoint(this.linearegPoints[i].X, this.linearegPoints[i].Y));
+                }
+            }
+            if (time >= 30)
+            {
+                int startTime = (int) (time - 30) * 1000 / this.fgModel.SpeedProperties.Sleep;
+                int i;
+                for ( i = startTime; i < currentPosition; i++)
+                {
+                    this.scatterSeries.Points.Add(new ScatterPoint(this.linearegPoints[i].X, this.linearegPoints[i].Y));
+                }
+            }
+        }
+
+        private void SetLinearReg()
+        {
+            LinearReg lineaReg = this.fgModel.GetLinearReg(this.SelectedField, this.CorrelatedField);
+            this.linearegPoints = lineaReg.Points;
+            this.linearRegLineAnnotation.Slope = lineaReg.Line.A;
+            this.linearRegLineAnnotation.Intercept = lineaReg.Line.B;
+            double minX = values.Min();
+            double minY = lineaReg.Line.F(minX);
+            double maxX = values.Max();
+            double maxY = lineaReg.Line.F(maxX);
+            var xAxis = this.LinearRegGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Bottom);
+            xAxis.Minimum = minX;
+            xAxis.Maximum = maxX;
+            var yAxis = this.LinearRegGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left);
+            yAxis.Minimum = minY;
+            yAxis.Maximum = maxY;
+            SetScatterSeries();
+            this.LinearRegGraph.InvalidatePlot(true);
         }
 
         private void SetLineSeries(LineSeries lineSeries, List<double> currentValues)
@@ -207,6 +249,12 @@ namespace AnomalyDetection.ViewModel
                 lineSeries.Points.Add(new DataPoint(i * fgModel.SpeedProperties.Sleep / 1000, currentValues[i]));
             }
         }
+
+        private void SpeedChangeHandler()
+        {
+            SetAllLineSeries();
+            SetScatterSeries();
+        } 
 
         private void SetAllLineSeries()
         {
@@ -223,18 +271,22 @@ namespace AnomalyDetection.ViewModel
             int size = selectedItemLineSeries.Points.Count;
             if (size < fgModel.CurrentPosition.Position)
             {
-                for(int i = size; i< fgModel.CurrentPosition.Position; i++)
+                for (int i = size; i < fgModel.CurrentPosition.Position; i++)
                 {
                     selectedItemLineSeries.Points.Add(new DataPoint(i * fgModel.SpeedProperties.Sleep / 1000, values[i]));
                     correlatedLineSeries.Points.Add(new DataPoint(i * fgModel.SpeedProperties.Sleep / 1000, correlatedValues[i]));
+                    scatterSeries.Points.Add(new ScatterPoint(linearegPoints[i].X, linearegPoints[i].Y));
+                    scatterSeries.Points.RemoveAt(0);
                 }
             }
-            else if(size > fgModel.CurrentPosition.Position)
+            else if (size > fgModel.CurrentPosition.Position)
             {
                 SetAllLineSeries();
+                SetScatterSeries();
             }
             SelectedItemGraph.InvalidatePlot(true);
             CorrelatedGraph.InvalidatePlot(true);
+            LinearRegGraph.InvalidatePlot(true);
         }
     }
 }

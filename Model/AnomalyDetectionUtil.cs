@@ -59,19 +59,6 @@ namespace AnomalyDetection.Model
             double b = Avg(y, size) - a * Avg(x, size);
             return new Line(a, b);
         }
-
-       // returns the deviation between point p and the line equation of the points
-        public static double Dev(Point p, Point[] points, int size)
-        {
-            Line line = LinearReg(points, size);
-            return Dev(p, line);
-        }
-
-        // returns the deviation between point p and the line
-        public static double Dev(Point p, Line l)
-        {
-            return Math.Abs(l.F(p.X) - p.Y);
-        }
     }
 
     public class Point 

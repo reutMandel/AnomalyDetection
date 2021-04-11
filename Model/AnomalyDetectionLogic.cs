@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace AnomalyDetection.Model
 {
@@ -27,7 +28,7 @@ namespace AnomalyDetection.Model
             return maxField;
         }
 
-        public static Line FindLinearReg(Dictionary<string, List<double>> values, string fieldName1, string fieldName2)
+        public static LinearReg FindLinearReg(Dictionary<string, List<double>> values, string fieldName1, string fieldName2)
         {
             double[] currentFieldValues = values[fieldName1].ToArray();
             double[] corrlatedFieldValues = values[fieldName2].ToArray();
@@ -37,7 +38,12 @@ namespace AnomalyDetection.Model
             {
                 points[i] = new Point(currentFieldValues[i], corrlatedFieldValues[i]);
             }
-            return AnomalyDetectionUtil.LinearReg(points, size);
+
+            return new LinearReg
+            {
+                Line = AnomalyDetectionUtil.LinearReg(points, size),
+                Points = points.ToList()
+            };
         }
     }
 }

@@ -22,6 +22,6 @@ namespace AnomalyDetection.Model
         void SlowStimulate();
         string GetCorrelatedField(string fieldName);
         List<double> GetValuesByField(string fieldName);
-        Line GetLinearReg(string field1, string field2);
+        LinearReg GetLinearReg(string field1, string field2);
     }
 }

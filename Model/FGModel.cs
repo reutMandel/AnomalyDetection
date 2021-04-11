@@ -110,7 +110,7 @@ namespace AnomalyDetection.Model
             return GraphsLogic.GetValuesByFieldName(fieldName);
         }
 
-        public Line GetLinearReg(string field1, string field2)
+        public LinearReg GetLinearReg(string field1, string field2)
         {
             return GraphsLogic.GetLinearReg(field1, field2);
         }

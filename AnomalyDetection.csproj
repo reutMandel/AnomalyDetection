@@ -78,6 +78,7 @@
     <Compile Include="Model\GraphsLogic.cs" />
     <Compile Include="Model\FlightProperties.cs" />
     <Compile Include="Model\Line.cs" />
+    <Compile Include="Model\LinearReg.cs" />
     <Compile Include="Model\Notify.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\CsvReader.cs" />
