@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using AnomalyDetection.Model;
+using System.ComponentModel;
 using System.Windows.Input;
-using AnomalyDetection.Model;
 
 namespace AnomalyDetection.ViewModel
 {

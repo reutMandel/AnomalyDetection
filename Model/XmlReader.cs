@@ -19,7 +19,7 @@ namespace AnomalyDetection.Model
         }
     }
 
-    
+
     [XmlRoot(ElementName = "PropertyList")]
     public class PropertyList
     {

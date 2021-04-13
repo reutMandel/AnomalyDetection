@@ -6,6 +6,8 @@
 
         public string CsvPath { get; set; }
 
-        public string FgPath { get; set; }
+        public string LearnCsvPath { get; set; }
+
+        public string DllPath { get; set; }
     }
 }

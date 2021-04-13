@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
-using System.Collections.Generic;
 
 namespace AnomalyDetection.Model
 {
@@ -14,16 +14,14 @@ namespace AnomalyDetection.Model
         private bool stopThread;
         private List<string> csvFile;
         private Dictionary<string, int> csvNames;
+
         public JoystickProperties Joystick { get; set; }
         public SpeedProperties SpeedProperties { get; set; }
         public FilesDataProperties FilesData { get; set; }
         public FlightProperties FlightProperties { get; set; }
         public GraphsLogic GraphsLogic { get; set; }
-
         public CurrentPosition CurrentPosition { get; set; }
-
         public event NotifyEventHandler LoadXmlCompleted;
-
 
         private static readonly FGModel instance = new FGModel();
 
@@ -53,6 +51,7 @@ namespace AnomalyDetection.Model
         {
             csvFile = CsvReader.ReadCsvFile(this.FilesData.CsvPath);
             SpeedProperties.NumOfLines = csvFile.Count;
+            GraphsLogic.Columns = CsvParserUtil.convertLinesToColumns(csvFile, csvNames);
         }
 
         public void ReadXmlFile()
@@ -63,12 +62,17 @@ namespace AnomalyDetection.Model
             LoadXmlCompleted();
         }
 
+        public void DllLoad()
+        {
+            GraphsLogic.DllLoad(this.FilesData);
+        }
+
         public void StartStimulate()
         {
-            GraphsLogic.Columns = CsvParserUtil.convertLinesToColumns(csvFile, csvNames);
+
             if (this.FilesData.CsvPath == null || this.FilesData.XmlPath == null)
             {
-                throw new Exception("csv path or xml path are not valid"); // create new exception
+                throw new Exception("csv path or xml path are not valid");
             }
             client.Connect();
             ChangeStimulate();
@@ -110,9 +114,9 @@ namespace AnomalyDetection.Model
             return GraphsLogic.GetValuesByFieldName(fieldName);
         }
 
-        public LinearReg GetLinearReg(string field1, string field2)
+        public AlgorithmProperties GetAlgorithmProperties(string field1, string field2)
         {
-            return GraphsLogic.GetLinearReg(field1, field2);
+            return GraphsLogic.GetAlgorithmProperties(field1, field2);
         }
 
         private void Logic(IClient client, int line)

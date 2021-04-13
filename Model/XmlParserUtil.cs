@@ -14,9 +14,6 @@ namespace AnomalyDetection.Model
                     names.Add(chunks[i].Name + "_1", i);
                 else
                     names.Add(chunks[i].Name, i);
-
-              //  if (!names.ContainsKey(chunks[i].Name))
-              //      names.Add(chunks[i].Name, i);
             }
             return names;
         }

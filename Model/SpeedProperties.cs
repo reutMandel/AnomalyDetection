@@ -22,7 +22,6 @@ namespace AnomalyDetection.Model
             {
                 this.speed = value;
                 NotifyPropertyChanged("Speed");
-               // SpeedChanged?.Invoke();
             }
         }
 

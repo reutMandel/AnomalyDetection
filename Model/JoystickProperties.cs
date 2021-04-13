@@ -9,7 +9,7 @@ namespace AnomalyDetection.Model
         private float aileron;
         private float elevator;
         private float throttle;
-       
+
         public JoystickProperties()
         {
             this.Rudder = 0;
@@ -63,7 +63,7 @@ namespace AnomalyDetection.Model
         public int ElevatorPosition { get; set; }
         public int ThrottlePosition { get; set; }
 
-        public void SetPositions(Dictionary<string,int> names)
+        public void SetPositions(Dictionary<string, int> names)
         {
             RudderPosition = names["rudder"];
             AileronPosition = names["aileron"];
@@ -71,7 +71,7 @@ namespace AnomalyDetection.Model
             ThrottlePosition = names["throttle"];
         }
 
-        public void SetValues (string rudder, string aileron, string elevator, string throttle)
+        public void SetValues(string rudder, string aileron, string elevator, string throttle)
         {
             Rudder = float.Parse(rudder, CultureInfo.InvariantCulture);
             Aileron = float.Parse(aileron, CultureInfo.InvariantCulture);

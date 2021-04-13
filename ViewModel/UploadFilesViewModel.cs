@@ -8,9 +8,11 @@ namespace AnomalyDetection.ViewModel
     public class UploadFilesViewModel : ViewModel
     {
         private IFGModel fgModel;
-        private bool xmlIsClick, csvIsClick, instructionIsClick, startIsEnable;
+        private bool xmlIsClick, csvIsClick, instructionIsClick, startIsEnable, dllIsClick, csvLearnIsClick, dllIsEnable;
         public ICommand XmlButtonCommand { get; set; }
         public ICommand CsvButtonCommand { get; set; }
+        public ICommand LearnCsvButtonCommand { get; set; }
+        public ICommand DllButtonCommand { get; set; }
         public ICommand InstructionButtonCommand { get; set; }
         public ICommand StartButtonCommand { get; set; }
 
@@ -21,9 +23,14 @@ namespace AnomalyDetection.ViewModel
             CsvButtonCommand = new DelegateCommand(o => CsvButtonClick());
             InstructionButtonCommand = new DelegateCommand(o => InstructionButtonClick());
             StartButtonCommand = new DelegateCommand(o => StartButtonClick());
+            DllButtonCommand = new DelegateCommand(o => DllButtonClick());
+            LearnCsvButtonCommand = new DelegateCommand(o => LearnCsvButtonClick());
+
             xmlIsClick = false;
             csvIsClick = false;
             instructionIsClick = false;
+            csvLearnIsClick = false;
+            dllIsClick = false;
             startIsEnable = false;
         }
 
@@ -47,6 +54,25 @@ namespace AnomalyDetection.ViewModel
             }
         }
 
+        public string LearnCsvFile
+        {
+            get { return fgModel.FilesData.LearnCsvPath; }
+            set
+            {
+                fgModel.FilesData.LearnCsvPath = value;
+                NotifyPropertyChanged("LearnCsvFile");
+            }
+        }
+
+        public string DllFile
+        {
+            get { return fgModel.FilesData.DllPath; }
+            set
+            {
+                fgModel.FilesData.DllPath = value;
+                NotifyPropertyChanged("DllFile");
+            }
+        }
 
         public bool StartIsClick
         {
@@ -55,6 +81,16 @@ namespace AnomalyDetection.ViewModel
             {
                 startIsEnable = value;
                 NotifyPropertyChanged("StartIsClick");
+            }
+        }
+
+        public bool DllIsEnable
+        {
+            get { return dllIsEnable; }
+            set
+            {
+                dllIsEnable = value;
+                NotifyPropertyChanged("DllIsEnable");
             }
         }
 
@@ -80,7 +116,8 @@ namespace AnomalyDetection.ViewModel
             {
                 CsvFile = openFileDialog.FileName;
                 csvIsClick = true;
-                StartIsClick = instructionIsClick && xmlIsClick && csvIsClick;
+                StartIsClick = instructionIsClick && xmlIsClick && csvIsClick && csvLearnIsClick && dllIsClick;
+                DllIsEnable = csvIsClick && csvLearnIsClick;
                 fgModel.ReadCsvFile();
             }
         }
@@ -92,8 +129,32 @@ namespace AnomalyDetection.ViewModel
             {
                 XmlFile = openFileDialog.FileName;
                 xmlIsClick = true;
-                StartIsClick = instructionIsClick && xmlIsClick && csvIsClick;
+                StartIsClick = instructionIsClick && xmlIsClick && csvIsClick && csvLearnIsClick && dllIsClick;
                 fgModel.ReadXmlFile();
+            }
+        }
+
+        private void LearnCsvButtonClick()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                LearnCsvFile = openFileDialog.FileName;
+                csvLearnIsClick = true;
+                StartIsClick = instructionIsClick && xmlIsClick && csvIsClick && csvLearnIsClick && dllIsClick;
+                DllIsEnable = csvIsClick && csvLearnIsClick;
+            }
+        }
+
+        private void DllButtonClick()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                DllFile = openFileDialog.FileName;
+                this.fgModel.DllLoad();
+                dllIsClick = true;
+                StartIsClick = instructionIsClick && xmlIsClick && csvIsClick && csvLearnIsClick && dllIsClick;
             }
         }
     }

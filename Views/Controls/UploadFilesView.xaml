@@ -8,10 +8,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="3" Margin="0,0,-0.4,0">
-            <Button x:Name="FGButton" Content="Instructions" Command="{Binding InstructionButtonCommand}"  Margin="10"  Width="100" Height="40"/>
-            <Button x:Name="XmlButton" Content="choose xml file" Command="{Binding XmlButtonCommand}"  Width="100" Margin="10" Height="40"/>
-            <Button x:Name="CsvButton" Content="choose csv file" Command="{Binding CsvButtonCommand}"  Margin="10"  Width="100" Height="40"/>
-            <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="100" Height="40"/>
+            <Button x:Name="FGButton" Content="Instructions" Command="{Binding InstructionButtonCommand}"  Margin="10"  Width="120" Height="40"/>
+            <Button x:Name="XmlButton" Content="choose xml file" Command="{Binding XmlButtonCommand}"  Width="120" Margin="10" Height="40"/>
+            <Button x:Name="CsvButton" Content="choose csv file" Command="{Binding CsvButtonCommand}"  Margin="10"  Width="120" Height="40"/>
+            <Button x:Name="LearnCsvButton" Content="choose learn csv file" Command="{Binding LearnCsvButtonCommand}"  Margin="10"  Width="120" Height="40"/>
+            <Button x:Name="DllButton" Content="upload dll algorithm" Command="{Binding DllButtonCommand}" IsEnabled="{Binding DllIsEnable}" Margin="10"  Width="120" Height="40"/>
+            <Button x:Name="DoneButton" Content="show simolator" Command="{Binding StartButtonCommand}" IsEnabled="{Binding StartIsClick}" Margin="10"  Width="120" Height="40"/>
         </StackPanel>
     </Grid>
 </UserControl>

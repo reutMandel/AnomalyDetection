@@ -3,7 +3,7 @@
     public interface IClient
     {
         void Connect();
-        void Send(byte [] buffer);
+        void Send(byte[] buffer);
         void Disconnect();
     }
 }

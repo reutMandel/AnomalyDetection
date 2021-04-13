@@ -59,9 +59,15 @@ namespace AnomalyDetection.Model
             double b = Avg(y, size) - a * Avg(x, size);
             return new Line(a, b);
         }
+
+        public static Circle MinCircle(Point[] points, int size)
+        {
+            MinCircle minCircle = new MinCircle();
+            return minCircle.FindMinCircle(points, size);
+        }
     }
 
-    public class Point 
+    public class Point
     {
         public double X { get; set; }
         public double Y { get; set; }
@@ -69,7 +75,7 @@ namespace AnomalyDetection.Model
         public Point(double x, double y)
         {
             this.X = x;
-            this.Y = y;  
+            this.Y = y;
         }
     }
 }

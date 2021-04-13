@@ -99,7 +99,7 @@ namespace AnomalyDetection.Model
             YawPosition = names["side-slip-deg"];
         }
 
-        public void SetValues(string [] values)
+        public void SetValues(string[] values)
         {
             Altimeter = double.Parse(values[AltimeterPosition], CultureInfo.InvariantCulture);
             Airspeed = double.Parse(values[AirspeedPosition], CultureInfo.InvariantCulture);

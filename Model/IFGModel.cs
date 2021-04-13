@@ -20,8 +20,9 @@ namespace AnomalyDetection.Model
         void PauseStimulate();
         void FastStimulate();
         void SlowStimulate();
+        void DllLoad();
         string GetCorrelatedField(string fieldName);
         List<double> GetValuesByField(string fieldName);
-        LinearReg GetLinearReg(string field1, string field2);
+        AlgorithmProperties GetAlgorithmProperties(string field1, string field2);
     }
 }

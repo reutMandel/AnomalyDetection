@@ -11,7 +11,7 @@ namespace AnomalyDetection.ViewModel
         {
             this.fgModel = fgModel;
             this.fgModel.FlightProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged(e.PropertyName); };
-            this.fgModel.FlightProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("Normalized"+e.PropertyName); };
+            this.fgModel.FlightProperties.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e) { NotifyPropertyChanged("Normalized" + e.PropertyName); };
             Airspeed = 0;
         }
 

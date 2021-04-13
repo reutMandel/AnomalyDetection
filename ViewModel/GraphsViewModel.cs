@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using AnomalyDetection.Model;
-using System.Linq;
+﻿using AnomalyDetection.Model;
 using OxyPlot;
+using OxyPlot.Annotations;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using OxyPlot.Annotations;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AnomalyDetection.ViewModel
 {
@@ -13,17 +13,20 @@ namespace AnomalyDetection.ViewModel
     {
         private IFGModel fgModel;
         private ObservableCollection<string> fieldsName;
+        private ObservableCollection<string> anomaliesStrList;
         private PlotModel selectedItemGraph;
         private PlotModel correlatedGraph;
-        private PlotModel linearRegGraph;
+        private PlotModel algorithmGraph;
         private string selectedField;
         private LineSeries selectedItemLineSeries;
         private LineSeries correlatedLineSeries;
-        private LineAnnotation linearRegLineAnnotation;
+        private Annotation algorithmAnnotation;
         private ScatterSeries scatterSeries;
         private List<double> values;
         private List<double> correlatedValues;
-        private List<Point> linearegPoints;
+        private List<Point> algorithmPoints;
+        private List<Point> anomalyPoints;
+        private ScatterSeries anomalyScatter;
         private string correlatedField;
         private bool isSelected;
 
@@ -37,6 +40,19 @@ namespace AnomalyDetection.ViewModel
             {
                 this.fieldsName = value;
                 NotifyPropertyChanged("FieldsName");
+            }
+        }
+
+        public ObservableCollection<string> AnomaliesStrList
+        {
+            get
+            {
+                return this.anomaliesStrList;
+            }
+            set
+            {
+                this.anomaliesStrList = value;
+                NotifyPropertyChanged("AnomaliesStrList");
             }
         }
 
@@ -60,13 +76,13 @@ namespace AnomalyDetection.ViewModel
             }
         }
 
-        public PlotModel LinearRegGraph
+        public PlotModel AlgorithmGraph
         {
-            get => this.linearRegGraph;
+            get => this.algorithmGraph;
             set
             {
-                this.linearRegGraph = value;
-                NotifyPropertyChanged("LinearRegGraph");
+                this.algorithmGraph = value;
+                NotifyPropertyChanged("AlgorithmGraph");
             }
         }
 
@@ -99,23 +115,29 @@ namespace AnomalyDetection.ViewModel
             this.fgModel.CurrentPosition.PositionChanged += delegate () { UpdateGraph(); };
             this.fgModel.SpeedProperties.SpeedChanged += delegate () { SpeedChangeHandler(); };
             this.fgModel.LoadXmlCompleted += delegate () { InsertFieldsName(); };
+            this.fgModel.GraphsLogic.LoadDllCompleted += delegate () { InsertAnomaliesStr(); };
             this.FieldsName = new ObservableCollection<string>();
+            this.AnomaliesStrList = new ObservableCollection<string>();
             this.SelectedItemGraph = new PlotModel();
             this.CorrelatedGraph = new PlotModel();
-            this.LinearRegGraph = new PlotModel();
+            this.AlgorithmGraph = new PlotModel();
             this.selectedItemLineSeries = new LineSeries();
             this.correlatedLineSeries = new LineSeries();
-            this.linearRegLineAnnotation = new LineAnnotation();
             this.scatterSeries = new ScatterSeries();
-
+            this.anomalyScatter = new ScatterSeries();
             SetUpSelectedFieldModel();
             SetUpCorrelatedFieldModel();
-            SetUpLinearRegdModel();
+            SetUpAlgorithmModel();
         }
 
         public void InsertFieldsName()
         {
             this.fgModel.CsvNames.Keys.ToList().ForEach(name => FieldsName.Add(name));
+        }
+
+        public void InsertAnomaliesStr()
+        {
+            this.fgModel.GraphsLogic.GetAnomaliesAsString().ForEach(name => AnomaliesStrList.Add(name));
         }
 
         private void SetUpSelectedFieldModel()
@@ -162,27 +184,27 @@ namespace AnomalyDetection.ViewModel
             CorrelatedGraph.Series.Add(correlatedLineSeries);
         }
 
-        private void SetUpLinearRegdModel()
+        private void SetUpAlgorithmModel()
         {
-            LinearRegGraph.Title = "LinearReg";
-
             var fieldAxis = new LinearAxis
             {
                 Position = AxisPosition.Bottom,
                 Title = "Selected Item"
             };
-            LinearRegGraph.Axes.Add(fieldAxis);
+            AlgorithmGraph.Axes.Add(fieldAxis);
             var valueAxis = new LinearAxis
             {
                 Position = AxisPosition.Left,
                 Title = "Correlated Item"
             };
-            LinearRegGraph.Axes.Add(valueAxis);
-            this.linearRegLineAnnotation.LineStyle = LineStyle.Solid;
-            LinearRegGraph.Annotations.Add(linearRegLineAnnotation);
+            AlgorithmGraph.Axes.Add(valueAxis);
             this.scatterSeries.MarkerType = MarkerType.Circle;
             this.scatterSeries.MarkerSize = 1.5;
-            LinearRegGraph.Series.Add(this.scatterSeries);
+            this.anomalyScatter.MarkerType = MarkerType.Circle;
+            this.anomalyScatter.MarkerSize = 1.5;
+            this.anomalyScatter.MarkerFill = OxyColors.Red;
+            AlgorithmGraph.Series.Add(this.scatterSeries);
+            AlgorithmGraph.Series.Add(this.anomalyScatter);
         }
 
         public void ItemSelected()
@@ -193,7 +215,7 @@ namespace AnomalyDetection.ViewModel
             SelectedItemGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left).Title = this.selectedField;
             this.values = fgModel.GetValuesByField(selectedField);
             SetAllLineSeries();
-            SetLinearReg();
+            SetAlgorithmGraph();
             this.isSelected = true;
         }
 
@@ -207,38 +229,42 @@ namespace AnomalyDetection.ViewModel
                 int i;
                 for (i = 0; i < currentPosition; i++)
                 {
-                    this.scatterSeries.Points.Add(new ScatterPoint(this.linearegPoints[i].X, this.linearegPoints[i].Y));
+                    this.scatterSeries.Points.Add(new ScatterPoint(this.algorithmPoints[i].X, this.algorithmPoints[i].Y));
                 }
             }
             if (time >= 30)
             {
-                int startTime = (int) (time - 30) * 1000 / this.fgModel.SpeedProperties.Sleep;
+                int startTime = (int)(time - 30) * 1000 / this.fgModel.SpeedProperties.Sleep;
                 int i;
-                for ( i = startTime; i < currentPosition; i++)
+                for (i = startTime; i < currentPosition; i++)
                 {
-                    this.scatterSeries.Points.Add(new ScatterPoint(this.linearegPoints[i].X, this.linearegPoints[i].Y));
+                    this.scatterSeries.Points.Add(new ScatterPoint(this.algorithmPoints[i].X, this.algorithmPoints[i].Y));
                 }
             }
         }
 
-        private void SetLinearReg()
+        private void SetAlgorithmGraph()
         {
-            LinearReg lineaReg = this.fgModel.GetLinearReg(this.SelectedField, this.CorrelatedField);
-            this.linearegPoints = lineaReg.Points;
-            this.linearRegLineAnnotation.Slope = lineaReg.Line.A;
-            this.linearRegLineAnnotation.Intercept = lineaReg.Line.B;
+            AlgorithmProperties properties = this.fgModel.GetAlgorithmProperties(this.SelectedField, this.CorrelatedField);
+            this.algorithmAnnotation = properties.AnnotationShape;
+            this.algorithmPoints = properties.Points;
+            this.anomalyPoints = this.fgModel.GraphsLogic.GetAnnomaliesPoints(this.SelectedField, this.CorrelatedField, this.algorithmPoints);
+            AlgorithmGraph.Annotations.Clear();
+            AlgorithmGraph.Annotations.Add(this.algorithmAnnotation);
+            SetScatterSeries();
+            AlgorithmGraph.InvalidatePlot(true);
+
             double minX = values.Min();
-            double minY = lineaReg.Line.F(minX);
+            double minY = correlatedValues.Min();
             double maxX = values.Max();
-            double maxY = lineaReg.Line.F(maxX);
-            var xAxis = this.LinearRegGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Bottom);
+            double maxY = correlatedValues.Max();
+            var xAxis = this.AlgorithmGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Bottom);
             xAxis.Minimum = minX;
             xAxis.Maximum = maxX;
-            var yAxis = this.LinearRegGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left);
+            var yAxis = this.AlgorithmGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left);
             yAxis.Minimum = minY;
             yAxis.Maximum = maxY;
             SetScatterSeries();
-            this.LinearRegGraph.InvalidatePlot(true);
         }
 
         private void SetLineSeries(LineSeries lineSeries, List<double> currentValues)
@@ -254,7 +280,7 @@ namespace AnomalyDetection.ViewModel
         {
             SetAllLineSeries();
             SetScatterSeries();
-        } 
+        }
 
         private void SetAllLineSeries()
         {
@@ -275,7 +301,7 @@ namespace AnomalyDetection.ViewModel
                 {
                     selectedItemLineSeries.Points.Add(new DataPoint(i * fgModel.SpeedProperties.Sleep / 1000, values[i]));
                     correlatedLineSeries.Points.Add(new DataPoint(i * fgModel.SpeedProperties.Sleep / 1000, correlatedValues[i]));
-                    scatterSeries.Points.Add(new ScatterPoint(linearegPoints[i].X, linearegPoints[i].Y));
+                    scatterSeries.Points.Add(new ScatterPoint(algorithmPoints[i].X, algorithmPoints[i].Y));
                     scatterSeries.Points.RemoveAt(0);
                 }
             }
@@ -286,7 +312,7 @@ namespace AnomalyDetection.ViewModel
             }
             SelectedItemGraph.InvalidatePlot(true);
             CorrelatedGraph.InvalidatePlot(true);
-            LinearRegGraph.InvalidatePlot(true);
+            AlgorithmGraph.InvalidatePlot(true);
         }
     }
 }

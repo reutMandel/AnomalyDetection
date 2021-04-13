@@ -11,9 +11,16 @@ namespace AnomalyDetection.Model
 
             using (StreamReader sr = new StreamReader(path))
             {
+                int i = 0;
                 string currentLine;
                 while ((currentLine = sr.ReadLine()) != null)
                 {
+                    if (i == 0)
+                    {
+                        i++;
+                        continue;
+                    }
+
                     lines.Add(currentLine + "\n");
                 }
             }

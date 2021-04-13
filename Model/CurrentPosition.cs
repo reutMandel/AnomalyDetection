@@ -1,5 +1,4 @@
-﻿
-namespace AnomalyDetection.Model
+﻿namespace AnomalyDetection.Model
 {
     public class CurrentPosition : Notify
     {
@@ -8,7 +7,8 @@ namespace AnomalyDetection.Model
         public int Position
         {
             get { return this.position; }
-            set {
+            set
+            {
                 this.position = value;
                 NotifyPropertyChanged("Position");
                 PositionChanged?.Invoke();

@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -73,12 +88,17 @@
     </Compile>
     <Compile Include="Model\AnomalyDetectionLogic.cs" />
     <Compile Include="Model\AnomalyDetectionUtil.cs" />
+    <Compile Include="Model\AnomalyReport.cs" />
+    <Compile Include="Model\CircleAlgorithm.cs" />
     <Compile Include="Model\CsvParserUtil.cs" />
     <Compile Include="Model\CurrentPosition.cs" />
     <Compile Include="Model\GraphsLogic.cs" />
     <Compile Include="Model\FlightProperties.cs" />
+    <Compile Include="Model\IAlgorithm.cs" />
     <Compile Include="Model\Line.cs" />
-    <Compile Include="Model\LinearReg.cs" />
+    <Compile Include="Model\AlgorithmProperties.cs" />
+    <Compile Include="Model\LineAlgorithm.cs" />
+    <Compile Include="Model\MinCircle.cs" />
     <Compile Include="Model\Notify.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\CsvReader.cs" />
@@ -192,6 +212,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Images\clock3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

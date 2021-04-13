@@ -21,10 +21,14 @@
                  Height="250" Width="150" FontSize="12"  SelectionChanged="ListBox_SelectionChanged" SelectedItem ="{Binding SelectedField, Mode=TwoWay}">
         </ListBox>
 
+        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AnomaliesStrList, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 Height="250" Width="150" FontSize="12">
+        </ListBox>
+        
         <oxy:PlotView Model="{Binding SelectedItemGraph, Mode=TwoWay}" Grid.Column="1" Width="250"  Height="200" Grid.Row="0"/>
 
         <oxy:PlotView Model="{Binding CorrelatedGraph, Mode=TwoWay}" Grid.Column="2" Height="200" Width="250" Grid.Row="0"/>
 
-        <oxy:PlotView Model="{Binding LinearRegGraph, Mode=TwoWay}" Grid.Column="1"  Height="350" Width="500" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <oxy:PlotView Model="{Binding AlgorithmGraph, Mode=TwoWay}" Grid.Column="1"  Height="250" Width="400" Grid.Row="2" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>
