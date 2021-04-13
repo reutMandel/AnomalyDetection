@@ -8,33 +8,36 @@
         Title="MainWindowView" WindowState="Maximized" Height="800" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Controls:UploadFilesView Grid.Column="3"></Controls:UploadFilesView>
-        
-        <StackPanel Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
-            <Controls:GraphsView ></Controls:GraphsView>
+        <Viewbox Grid.Column="3">
+            <Controls:UploadFilesView ></Controls:UploadFilesView>
+        </Viewbox>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Controls:GraphsView Height="616" Margin="0,0,0.2,0" ></Controls:GraphsView>
         </StackPanel>
-            
-        <Viewbox>       
-            <Controls:JoystickView Grid.Column="0" Grid.Row="0" ></Controls:JoystickView>
+
+        <Viewbox Margin="15" Grid.Column="2" Grid.Row="0">
+            <Controls:JoystickView  ></Controls:JoystickView>
         </Viewbox>
-        <Viewbox>
-            <Controls:JoystickView Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2"></Controls:JoystickView>
+
+        <Viewbox Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="60">
+        <Controls:FlightPropertiesView ></Controls:FlightPropertiesView>
         </Viewbox>
-        <Viewbox Grid.Column="0" Grid.Row="1">
-            <Controls:FlightPropertiesView ></Controls:FlightPropertiesView>
-        </Viewbox>
-        
-        <Controls:ToolBar Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2"></Controls:ToolBar>
+
+        <!--<Viewbox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">-->
+        <Controls:ToolBar Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" ></Controls:ToolBar>
+        <!--</Viewbox>-->
     </Grid>
 </Window>

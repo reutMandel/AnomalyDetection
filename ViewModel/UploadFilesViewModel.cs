@@ -9,6 +9,7 @@ namespace AnomalyDetection.ViewModel
     {
         private IFGModel fgModel;
         private bool xmlIsClick, csvIsClick, instructionIsClick, startIsEnable, dllIsClick, csvLearnIsClick, dllIsEnable;
+        private string dllButtonMes;
         public ICommand XmlButtonCommand { get; set; }
         public ICommand CsvButtonCommand { get; set; }
         public ICommand LearnCsvButtonCommand { get; set; }
@@ -32,6 +33,17 @@ namespace AnomalyDetection.ViewModel
             csvLearnIsClick = false;
             dllIsClick = false;
             startIsEnable = false;
+            dllButtonMes = "";
+        }
+
+        public string DllButtonMes
+        {
+            get { return dllButtonMes; }
+            set
+            {
+                dllButtonMes = value;
+                NotifyPropertyChanged("DllButtonMes");
+            }
         }
 
         public string XmlFile
@@ -152,6 +164,7 @@ namespace AnomalyDetection.ViewModel
             if (openFileDialog.ShowDialog() == true)
             {
                 DllFile = openFileDialog.FileName;
+                DllButtonMes = "Upload...";
                 this.fgModel.DllLoad();
                 dllIsClick = true;
                 StartIsClick = instructionIsClick && xmlIsClick && csvIsClick && csvLearnIsClick && dllIsClick;

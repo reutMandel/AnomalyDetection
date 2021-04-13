@@ -17,12 +17,17 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+
+
+
+        <Label Content="Features" Grid.Row="0" Grid.Column="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
         <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding FieldsName, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 Height="250" Width="150" FontSize="12"  SelectionChanged="ListBox_SelectionChanged" SelectedItem ="{Binding SelectedField, Mode=TwoWay}">
+                 Height="250" Width="250" FontSize="12"  SelectionChanged="ListBox_SelectionChanged" SelectedItem ="{Binding SelectedField, Mode=TwoWay}">
         </ListBox>
 
+        <Label Content="Anomalies" Grid.Row="1" Grid.Column="0" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center"></Label>
         <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding AnomaliesStrList, Mode=TwoWay}" ScrollViewer.VerticalScrollBarVisibility="Visible"
-                 Height="250" Width="150" FontSize="12">
+                 Height="250" Width="250" FontSize="12">
         </ListBox>
         
         <oxy:PlotView Model="{Binding SelectedItemGraph, Mode=TwoWay}" Grid.Column="1" Width="250"  Height="200" Grid.Row="0"/>
