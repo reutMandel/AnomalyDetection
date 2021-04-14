@@ -40,7 +40,7 @@ The following instructions will guide you how to download the flight simulator a
   The class diagram has three layres according to mvvm architecture : View, ViewModel, Model
   In order to show the class diagram please install the ClassDiagram extension of visual studio.
   * link to source class diagram: https://github.com/reutMandel/AnomalyDetection/dev/ClassDiagram.cd
-  * link to picture: ![ClassDiagram](https://github.com/reutMandel/AnomalyDetection/dev/ClassDiagram.png)
+  * link to picture: ![ClassDiagram](https://github.com/reutMandel/AnomalyDetection/blob/dev/ClassDiagram.png)
   
 # UI Features
  * Start click buttons:
