@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AnomalyDetection.Model.AlgorithmProperties">
+    <Position X="18" Y="18.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\AlgorithmProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.AnomalyDetectionLogic">
+    <Position X="13.5" Y="18.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAgAAAAgAACACAAAIAAEAAQAUAAAQAACAAAAAI=</HashCode>
+      <FileName>Model\AnomalyDetectionLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.AnomalyDetectionUtil">
+    <Position X="16.25" Y="20" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAgAAAAAACAAQAAAAAAAAAAAAEAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Model\AnomalyDetectionUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.AnomalyReport">
+    <Position X="16.25" Y="18.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Model\AnomalyReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.CsvParserUtil">
+    <Position X="2.5" Y="13.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CsvParserUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.CsvReader">
+    <Position X="2.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CsvReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.CurrentPosition">
+    <Position X="15.25" Y="13.75" Width="1.5" />
+    <Members>
+      <Field Name="position" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CurrentPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.FilesDataProperties">
+    <Position X="5" Y="12.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAIAAAAAAAAAAAAAQAAgAAAAAAAAA=</HashCode>
+      <FileName>Model\FilesDataProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.FlightProperties">
+    <Position X="13.5" Y="13.75" Width="1.5" />
+    <Members>
+      <Field Name="airspeed" Hidden="true" />
+      <Field Name="altimeter" Hidden="true" />
+      <Field Name="direction" Hidden="true" />
+      <Field Name="pitch" Hidden="true" />
+      <Field Name="roll" Hidden="true" />
+      <Field Name="yaw" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAQIAAAQAAIgEAECAAAAAgCAAAJkAAAARCgAAAAEA=</HashCode>
+      <FileName>Model\FlightProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.GraphsLogic">
+    <Position X="21.25" Y="13.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABiAKCAAAAgAAAAAQIAAAAAAAAAAAAAEgAAAA=</HashCode>
+      <FileName>Model\GraphsLogic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AlgorithmProperties" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AnomalyDetection.Model.JoystickProperties">
+    <Position X="19" Y="13.75" Width="1.75" />
+    <Members>
+      <Field Name="aileron" Hidden="true" />
+      <Field Name="elevator" Hidden="true" />
+      <Field Name="rudder" Hidden="true" />
+      <Field Name="throttle" Hidden="true" />
+    </Members>
+    <InheritanceLine Type="AnomalyDetection.Model.Notify" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="18.75" Y="12.562" />
+        <Point X="18.75" Y="13.375" />
+        <Point X="19.875" Y="13.375" />
+        <Point X="19.875" Y="13.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAggAhAIBAAAACQAAAAIAgAAEAAAABAAAAA=</HashCode>
+      <FileName>Model\JoystickProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.Notify" Collapsed="true">
+    <Position X="18" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\Notify.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Model.SpeedProperties">
+    <Position X="17" Y="13.75" Width="1.75" />
+    <Members>
+      <Field Name="numOfLines" Hidden="true" />
+      <Field Name="sleep" Hidden="true" />
+      <Field Name="speed" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAEAAABAAAABAABAAQAAIABAAAAAAAA=</HashCode>
+      <FileName>Model\SpeedProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.XmlParserUtil">
+    <Position X="0.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\XmlParserUtil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.Model.FGXmlReader">
+    <Position X="0.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Model\XmlReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnomalyDetection.ViewModel.FlightPropertiesViewModel">
+    <Position X="6.5" Y="4.75" Width="2.25" />
+    <AssociationLine Name="fgModel" Type="AnomalyDetection.Model.IFGModel" FixedToPoint="true">
+      <Path>
+        <Point X="8.75" Y="6.265" />
+        <Point X="9" Y="6.265" />
+        <Point X="9" Y="8.031" />
+        <Point X="8.625" Y="8.031" />
+        <Point X="8.625" Y="11" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAQAAAAAAAEEACAAAAAAAAAAAgAAAARAAAAAAAA=</HashCode>
+      <FileName>ViewModel\FlightPropertiesViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fgModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AnomalyDetection.ViewModel.GraphsViewModel">
+    <Position X="9.75" Y="4.75" Width="2.25" />
+    <Members>
+      <Field Name="algorithmAnnotation" Hidden="true" />
+      <Field Name="algorithmGraph" Hidden="true" />
+      <Field Name="algorithmPoints" Hidden="true" />
+      <Field Name="anomaliesStrList" Hidden="true" />
+      <Field Name="anomalyPoints" Hidden="true" />
+      <Field Name="anomalyScatter" Hidden="true" />
+      <Field Name="correlatedField" Hidden="true" />
+      <Field Name="correlatedGraph" Hidden="true" />
+      <Field Name="correlatedLineSeries" Hidden="true" />
+      <Field Name="correlatedValues" Hidden="true" />
+      <Field Name="fieldsName" Hidden="true" />
+      <Field Name="isSelected" Hidden="true" />
+      <Field Name="scatterSeries" Hidden="true" />
+      <Field Name="selectedField" Hidden="true" />
+      <Field Name="selectedItemGraph" Hidden="true" />
+      <Field Name="selectedItemLineSeries" Hidden="true" />
+      <Method Name="SetAlgorithmGraph" Hidden="true" />
+      <Method Name="SetAllLineSeries" Hidden="true" />
+      <Method Name="SetLineSeries" Hidden="true" />
+      <Method Name="SetScatterSeries" Hidden="true" />
+      <Method Name="SpeedChangeHandler" Hidden="true" />
+      <Field Name="values" Hidden="true" />
+    </Members>
+    <AssociationLine Name="fgModel" Type="AnomalyDetection.Model.IFGModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.875" Y="9.127" />
+        <Point X="10.875" Y="10.625" />
+        <Point X="9.562" Y="10.625" />
+        <Point X="9.562" Y="11" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ABIgAAwwIAQEEgiAqAIAACCCAEAgiCpACEACAEAQAAg=</HashCode>
+      <FileName>ViewModel\GraphsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fgModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AnomalyDetection.ViewModel.JoystickViewModel">
+    <Position X="12.25" Y="4.75" Width="1.75" />
+    <AssociationLine Name="fgModel" Type="AnomalyDetection.Model.IFGModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.125" Y="7.011" />
+        <Point X="13.125" Y="11.063" />
+        <Point X="10" Y="11.063" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.148" Y="0.073" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACQAAAgAAAAABAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>ViewModel\JoystickViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fgModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AnomalyDetection.ViewModel.ToolBarViewModel">
+    <Position X="3.75" Y="4.75" Width="1.75" />
+    <AssociationLine Name="fgModel" Type="AnomalyDetection.Model.IFGModel" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.344" Y="8.742" />
+        <Point X="4.344" Y="11.5" />
+        <Point X="8.5" Y="11.5" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQASAAAgEABAgAABAAgABAAAAAAAAAABAAADAAAE=</HashCode>
+      <FileName>ViewModel\ToolBarViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fgModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AnomalyDetection.ViewModel.UploadFilesViewModel">
+    <Position X="14.25" Y="4.75" Width="2.25" />
+    <Members>
+      <Field Name="csvIsClick" Hidden="true" />
+      <Field Name="csvLearnIsClick" Hidden="true" />
+      <Field Name="dllButtonMes" Hidden="true" />
+      <Field Name="dllIsClick" Hidden="true" />
+      <Field Name="dllIsEnable" Hidden="true" />
+      <Field Name="instructionIsClick" Hidden="true" />
+      <Field Name="startIsEnable" Hidden="true" />
+      <Field Name="xmlIsClick" Hidden="true" />
+    </Members>
+    <AssociationLine Name="fgModel" Type="AnomalyDetection.Model.IFGModel">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.161" Y="-0.285" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CFAAAIUAAACAAgAAGQAAACIwAAAgIABABUEAAIghABA=</HashCode>
+      <FileName>ViewModel\UploadFilesViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fgModel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AnomalyDetection.ViewModel.ViewModel" Collapsed="true">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\ViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Views.MainWindowView">
+    <Position X="8.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindowView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Views.Controls.FlightPropertiesView">
+    <Position X="6" Y="0.75" Width="1.75" />
+    <AssociationLine Name="flightPropertiesViewModel" Type="AnomalyDetection.ViewModel.FlightPropertiesViewModel">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.051" Y="0.06" Height="0.182" Width="1.84" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Views\Controls\FlightPropertiesView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="flightPropertiesViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Views.Controls.GraphsView">
+    <Position X="10.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAABAAAA=</HashCode>
+      <FileName>Views\Controls\GraphsView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="graphsViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Views.Controls.JoystickView">
+    <Position X="12.75" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Views\Controls\JoystickView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="joystickViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Views.Controls.ToolBar">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Controls\ToolBar.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="toolBarViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Views.Controls.UploadFilesView">
+    <Position X="15" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Controls\UploadFilesView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="uploadFilesViewModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Model.LineAlgorithm">
+    <Position X="19.5" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\LineAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Model.CircleAlgorithm">
+    <Position X="22" Y="20" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\CircleAlgorithm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Model.Client">
+    <Position X="5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAgAAEBAAIAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Model\Client.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AnomalyDetection.Model.FGModel">
+    <Position X="8.5" Y="12" Width="2" />
+    <Members>
+      <Field Name="client" Hidden="true" />
+      <Field Name="csvFile" Hidden="true" />
+      <Field Name="csvNames" Hidden="true" />
+      <Field Name="instance" Hidden="true" />
+      <Field Name="stopThread" Hidden="true" />
+      <Field Name="thread" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Joystick" Type="AnomalyDetection.Model.JoystickProperties" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="13.081" />
+        <Point X="18.667" Y="13.081" Type="JumpStart" />
+        <Point X="18.833" Y="13.081" Type="JumpEnd" />
+        <Point X="20.344" Y="13.081" />
+        <Point X="20.344" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="SpeedProperties" Type="AnomalyDetection.Model.SpeedProperties" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="13.098" />
+        <Point X="17.406" Y="13.098" />
+        <Point X="17.406" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="FlightProperties" Type="AnomalyDetection.Model.FlightProperties" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="13.098" />
+        <Point X="13.875" Y="13.098" />
+        <Point X="13.875" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="GraphsLogic" Type="AnomalyDetection.Model.GraphsLogic" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="13.081" />
+        <Point X="18.667" Y="13.081" Type="JumpStart" />
+        <Point X="18.833" Y="13.081" Type="JumpEnd" />
+        <Point X="21.719" Y="13.081" />
+        <Point X="21.719" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="CurrentPosition" Type="AnomalyDetection.Model.CurrentPosition" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="13.081" />
+        <Point X="15.594" Y="13.081" />
+        <Point X="15.594" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QEIAAQAAgYCHBQEAggQAAAAAAEBAhgBAQCAABAAAAAQ=</HashCode>
+      <FileName>Model\FGModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Joystick" />
+      <Property Name="SpeedProperties" />
+      <Property Name="FilesData" />
+      <Property Name="FlightProperties" />
+      <Property Name="GraphsLogic" />
+      <Property Name="CurrentPosition" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="AnomalyDetection.Model.IAlgorithm">
+    <Position X="20.75" Y="18.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IAlgorithm.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AnomalyDetection.Model.IClient">
+    <Position X="5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAEAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model\IClient.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AnomalyDetection.Model.IFGModel" Collapsed="true">
+    <Position X="8.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEIAAQAAgACGBQAAgAQAAAAAAEAAhgBAQAAAAAAAAAQ=</HashCode>
+      <FileName>Model\IFGModel.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

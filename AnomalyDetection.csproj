@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -24,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,10 +49,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=2.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,17 +82,58 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="Model\AnomalyDetectionLogic.cs" />
+    <Compile Include="Model\AnomalyDetectionUtil.cs" />
+    <Compile Include="Model\AnomalyReport.cs" />
+    <Compile Include="Model\Circle.cs" />
+    <Compile Include="Model\CircleAlgorithm.cs" />
+    <Compile Include="Model\CsvParserUtil.cs" />
+    <Compile Include="Model\CurrentPosition.cs" />
+    <Compile Include="Model\GraphsLogic.cs" />
+    <Compile Include="Model\FlightProperties.cs" />
+    <Compile Include="Model\IAlgorithm.cs" />
+    <Compile Include="Model\Line.cs" />
+    <Compile Include="Model\AlgorithmProperties.cs" />
+    <Compile Include="Model\LineAlgorithm.cs" />
+    <Compile Include="Model\Notify.cs" />
+    <Compile Include="Model\Client.cs" />
+    <Compile Include="Model\CsvReader.cs" />
+    <Compile Include="Model\FGModel.cs" />
+    <Compile Include="Model\FilesDataProperties.cs" />
+    <Compile Include="Model\IClient.cs" />
+    <Compile Include="Model\IFGModel.cs" />
+    <Compile Include="Model\JoystickProperties.cs" />
+    <Compile Include="Model\SpeedProperties.cs" />
+    <Compile Include="Model\XmlParserUtil.cs" />
+    <Compile Include="Model\XmlReader.cs" />
+    <Compile Include="ViewModel\DelegateCommand.cs" />
+    <Compile Include="ViewModel\FlightPropertiesViewModel.cs" />
+    <Compile Include="ViewModel\GraphsViewModel.cs" />
+    <Compile Include="ViewModel\JoystickViewModel.cs" />
+    <Compile Include="ViewModel\ToolBarViewModel.cs" />
+    <Compile Include="ViewModel\UploadFilesViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="Views\Controls\FlightPropertiesView.xaml.cs">
+      <DependentUpon>FlightPropertiesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\GraphsView.xaml.cs">
+      <DependentUpon>GraphsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\JoystickView.xaml.cs">
+      <DependentUpon>JoystickView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ToolBar.xaml.cs">
+      <DependentUpon>ToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\UploadFilesView.xaml.cs">
+      <DependentUpon>UploadFilesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +154,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +163,72 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\Controls\GraphsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\FlightPropertiesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\JoystickView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\UploadFilesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\continue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\pause.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\forward.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\backward.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\compass.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\speedometer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\clock3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ClassDiagram.png" />
+    <Content Include="plugins\ANOMALYREGRESSIONALGORITHM.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
