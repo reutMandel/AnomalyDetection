@@ -25,7 +25,7 @@ The following instructions will guide you how to download the flight simulator a
   * Upload xml file, anomaly csv file and the learn csv file to the application
     **please upload csv files with header line**.
   * Upload the specific anomaly algorithm dll - "ANOMALYALGORITHM.dll"
-   ** the loading can take a few minutes please wait**
+   ** the loading can take a few minutes please wait until the show simulator button enable**
   * Click on the "Show Simulator" to start the application
 
 # Project Structure
@@ -39,8 +39,8 @@ The following instructions will guide you how to download the flight simulator a
 # Class Diagram
   The class diagram has three layres according to mvvm architecture : View, ViewModel, Model
   In order to show the class diagram please install the ClassDiagram extension of visual studio.
-  * link to source class diagram: https://github.com/reutMandel/AnomalyDetection/userStory1/ClassDiagram.cd
-  * link to picture: ![ClassDiagram](https://github.com/reutMandel/AnomalyDetection/blob/userStory1/ClassDiagram.png)
+  * link to source class diagram: https://github.com/reutMandel/AnomalyDetection/dev/ClassDiagram.cd
+  * link to picture: ![ClassDiagram](https://github.com/reutMandel/AnomalyDetection/blob/dev/ClassDiagram.png)
   
 # UI Features
  * Start click buttons:
