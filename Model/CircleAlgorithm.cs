@@ -8,18 +8,24 @@ namespace AnomalyDetection.Model
     {
         public AlgorithmProperties GetAlgorithmProperties(Point[] points)
         {
-            Circle circle = AnomalyDetectionUtil.MinCircle(points, points.Length);
+            Circle circle = AnomalyDetectionLogic.FindMinCircle(points);
             EllipseAnnotation annotation = new EllipseAnnotation();
-            annotation.Width = circle.Radius * 2;
-            annotation.Height = circle.Radius * 2;
+            annotation.Width = 2 * circle.Radius;
+            annotation.Height = 2 * circle.Radius;
             annotation.X = circle.Center.X;
             annotation.Y = circle.Center.Y;
             annotation.Fill = OxyColors.Transparent;
-            annotation.Stroke = OxyColors.Black; annotation.StrokeThickness = 2;
+            annotation.Stroke = OxyColors.Black; 
+            annotation.StrokeThickness = 2;
+
             return new AlgorithmProperties
             {
                 Points = points.ToList(),
-                AnnotationShape = annotation
+                AnnotationShape = annotation,
+                minX = (int)( circle.Center.X - (2 * circle.Radius)),
+                maxX = (int)(circle.Center.X + 2 * circle.Radius),
+                minY = (int)(circle.Center.Y - (2 * circle.Radius)),
+                maxY = (int)(circle.Center.Y + (2 * circle.Radius)),
             };
         }
     }

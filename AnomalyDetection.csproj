@@ -89,6 +89,7 @@
     <Compile Include="Model\AnomalyDetectionLogic.cs" />
     <Compile Include="Model\AnomalyDetectionUtil.cs" />
     <Compile Include="Model\AnomalyReport.cs" />
+    <Compile Include="Model\Circle.cs" />
     <Compile Include="Model\CircleAlgorithm.cs" />
     <Compile Include="Model\CsvParserUtil.cs" />
     <Compile Include="Model\CurrentPosition.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="Model\Line.cs" />
     <Compile Include="Model\AlgorithmProperties.cs" />
     <Compile Include="Model\LineAlgorithm.cs" />
-    <Compile Include="Model\MinCircle.cs" />
     <Compile Include="Model\Notify.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\CsvReader.cs" />

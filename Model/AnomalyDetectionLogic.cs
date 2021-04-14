@@ -37,6 +37,44 @@ namespace AnomalyDetection.Model
         [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr getShapeName();
 
+        [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr CreatePointsArrayWrapper();
+
+        [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void AddPoint(IntPtr p, float x, float y);
+
+        [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr GetPointArray(IntPtr p);
+
+        [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr GetCircleWrapper(IntPtr points, int size);
+
+        [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetXCircleWrapper(IntPtr c);
+
+        [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetYCircleWrapper(IntPtr c);
+
+        [DllImport(filePath, CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int GetRadiusWrapper(IntPtr c);
+
+    
+        public static Circle FindMinCircle(Point[] points)
+        {
+            IntPtr pointWrap = CreatePointsArrayWrapper();
+            for(int i=0; i<points.Length; i++)
+            {
+                AddPoint(pointWrap, points[i].X, points[i].Y);
+            }
+            IntPtr pointsArr = GetPointArray(pointWrap);
+            IntPtr circleWrap = GetCircleWrapper(pointsArr, points.Length);
+            int x = GetXCircleWrapper(circleWrap);
+            int y = GetYCircleWrapper(circleWrap);
+            int r = GetRadiusWrapper(circleWrap);
+            return new Circle(new Point(x, y), r);
+        }
+
+
         public static string FindCorrelated(Dictionary<string, List<double>> values, string fieldName)
         {
             double[] currentFieldValues = values[fieldName].ToArray();

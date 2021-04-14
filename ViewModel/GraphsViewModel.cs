@@ -259,11 +259,12 @@ namespace AnomalyDetection.ViewModel
             double maxX = values.Max();
             double maxY = correlatedValues.Max();
             var xAxis = this.AlgorithmGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Bottom);
-            xAxis.Minimum = minX;
-            xAxis.Maximum = maxX;
+            xAxis.Minimum = properties.minX;
+            xAxis.Maximum = properties.maxX;
             var yAxis = this.AlgorithmGraph.Axes.FirstOrDefault(x => x.Position == AxisPosition.Left);
-            yAxis.Minimum = minY;
-            yAxis.Maximum = maxY;
+            yAxis.Minimum = properties.minY;
+            yAxis.Maximum = properties.maxY;
+
             SetScatterSeries();
         }
 

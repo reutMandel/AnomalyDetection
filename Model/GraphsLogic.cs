@@ -30,7 +30,7 @@ namespace AnomalyDetection.Model
             Point[] points = new Point[size];
             for (int i = 0; i < size; i++)
             {
-                points[i] = new Point(currentFieldValues[i], corrlatedFieldValues[i]);
+                points[i] = new Point((float)currentFieldValues[i], (float)corrlatedFieldValues[i]);
             }
             return this.AlgorithmProperties.GetAlgorithmProperties(points);
         }
