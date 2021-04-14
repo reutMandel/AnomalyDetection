@@ -8,7 +8,7 @@ The following instructions will guide you how to download the flight simulator a
  
 # Prerequisites
 * ### Flight simulator installation
-  * Download the latest flight simulator version for your os from the ***https://www.flightgear.org/*** page.
+  * Download the latest flight simulator version for your os from the **https://www.flightgear.org/** page.
   * Add the playback_xml file to **$FG_ROOT/data/Protocol** directory.
    Press the settings button and change to the following settings:
     ```bash
@@ -25,16 +25,23 @@ The following instructions will guide you how to download the flight simulator a
   * Upload xml file, anomaly csv file and the learn csv file to the application
     **please upload csv files with header line**.
   * Upload the specific anomaly algorithm dll - "ANOMALYALGORITHM.dll"
+   ** the loading can take a few minutes please wait**
   * Click on the "Show Simulator" to start the application
 
 # Project Structure
   The project implements the architecture design pattern of MVVM. Therefore it consists three main components: 
-  * Model : implements the logic of the application. Has a externalize interface: IFGModel
+  * **Model** : implements the logic of the application. Has a externalize interface: IFGModel
             Each class in the model hold the relevant properties and handle with the relevant logic.
-  * ViewModel : implements the logic of the view. Has a basic class : ViewModel 
+  * **ViewModel** : implements the logic of the view. Has a basic class : ViewModel 
             Each view logic part implemneted in differnet view model.
-  * View : represents the UI of the application. The view divide into several user controls
+  * **View** : represents the UI of the application. The view divide into several user controls
 
+# Class Diagram
+  The class diagram has three layres according to mvvm architecture : View, ViewModel, Model
+  In order to show the class diagram please install the ClassDiagram extension of visual studio.
+  * link to source class diagram: https://github.com/reutMandel/AnomalyDetection/userStory1/ClassDiagram.cd
+  * link to picture: ![ClassDiagram](https://github.com/reutMandel/AnomalyDetection/blob/userStory1/ClassDiagram.png)
+  
 # UI Features
  * Start click buttons:
    * Instrucions buttono
