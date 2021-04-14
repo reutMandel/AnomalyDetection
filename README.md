@@ -61,3 +61,7 @@ The following instructions will guide you how to download the flight simulator a
    The X-axis represnts the time in seconds
  * Display list of anomalys : each raw in the list conatins two fields seperated by ":" that has been anomaly   between them and the raw number of the anomaly
  * Display a graph according to the dll algorithm that has been loaded. In addition, we dislpay all the points   that belonging to the last 30 seconds of the flight. 
+
+# Example Video
+ * Download the main video from the link:  https://github.com/reutMandel/AnomalyDetection/tree/dev/record1.mp4
+ * An additional sort video: https://github.com/reutMandel/AnomalyDetection/tree/dev/record2.mp4
