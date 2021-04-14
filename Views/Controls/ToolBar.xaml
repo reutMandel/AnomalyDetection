@@ -36,7 +36,7 @@
                 </Button.Background>
             </Button>
             <Label Content="Speed" VerticalAlignment="Center" FontSize="20"></Label>
-            <Label Content="{Binding Speed}" VerticalAlignment="Center" FontSize="20" BorderThickness="0.5" HorizontalAlignment="Center" BorderBrush="Black" Width="35"></Label>
+            <Label Content="{Binding Speed}" VerticalAlignment="Center" FontSize="20" BorderThickness="0.5" HorizontalAlignment="Center" BorderBrush="Black" Width="45"></Label>
            
         </StackPanel>
         <Slider Grid.Row="1" x:Name="SlideController" Minimum="0" Maximum="{Binding NumOfLines}" IsSnapToTickEnabled="True" Value="{Binding Position, Mode=TwoWay}" Background="Black" Height="20"/>
