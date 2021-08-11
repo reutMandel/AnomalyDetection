@@ -252,8 +252,7 @@
     <Resource Include="ClassDiagram.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="plugins\ANOMALYCIRCLEALGORITHM.dll" />
-    <Content Include="plugins\ANOMALYREGRESSIONALGORITHM.dll" />
+    <Folder Include="plugins\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
