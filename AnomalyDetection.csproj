@@ -251,6 +251,7 @@
   <ItemGroup>
     <Resource Include="ClassDiagram.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="plugins\ANOMALYCIRCLEALGORITHM.dll" />
     <Content Include="plugins\ANOMALYREGRESSIONALGORITHM.dll" />
