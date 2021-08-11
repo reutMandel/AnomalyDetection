@@ -42,7 +42,10 @@ namespace AnomalyDetection.Model
             string fullPath = destinationDirectory + "ANOMALYALGORITHM.dll";
             if (File.Exists(fullPath))
             {
-                File.Delete(fullPath);
+                if (File.Exists(destinationDirectory + "old.dll"))
+                    File.Delete(destinationDirectory + "old.dll");
+                File.Move(fullPath, destinationDirectory + "old.dll");
+
             }
             File.Copy(fileToCopy, fullPath);
             Anomalies = AnomalyDetectionLogic.FindAnomalies(filesData.CsvPath, filesData.LearnCsvPath);
